@@ -1,7 +1,6 @@
 package com.example;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class Astronauta implements Serializable{
     private String id;
