@@ -21,6 +21,6 @@ public class NaveTripulada extends Nave {
     @Override
     public String toString(){
         super.toString();
-        return  "\nCapacidade " + this.capacidadeTripulantes + " Pessoas";
+        return  "\nCapacidade de Tripulantes" + this.capacidadeTripulantes + " Pessoas";
     }
 }

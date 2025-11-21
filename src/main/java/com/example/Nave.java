@@ -1,6 +1,10 @@
 package com.example;
+import java.io.Serializable;
 
-public abstract class Nave {
+public abstract class Nave implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private String id;
     private String modelo;
     private boolean disponivel;
