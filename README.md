@@ -144,21 +144,34 @@ Baixe e instale o JDK 11 do site da Oracle ou OpenJDK.
 aulajava/
 ├── pom.xml
 ├── README.md
+├── run-windows.bat
+├── run.sh
 └── src/
     └── main/
         └── java/
             └── com/
                 └── example/
-                    ├── Person.java
-                    └── Main.java
+                    ├── Person.java          # Classe modelo de Pessoa
+                    ├── Main.java            # Aplicação console (linha de comando)
+                    ├── MainFX.java          # Aplicação JavaFX (interface gráfica)
+                    └── PersonService.java   # Serviço CRUD para gerenciar pessoas
 ```
 
 ## Funcionalidades
 
+### Versão Console (Main.java)
 - Adicionar pessoas ao banco de dados
 - Listar todas as pessoas cadastradas
 - Buscar pessoa por ID
 - Persistência em banco Nitrite (arquivo `pessoas.db`)
+
+### Versão JavaFX (MainFX.java) - Interface Gráfica
+- **CRUD Completo**: Criar, Ler, Atualizar e Deletar pessoas
+- **Interface Gráfica Moderna**: Tabela para visualizar pessoas
+- **Formulário Interativo**: Campos para cadastrar/editar pessoas
+- **Validação de Dados**: Validação de campos obrigatórios e formato
+- **Confirmação de Exclusão**: Diálogo de confirmação antes de excluir
+- **Atualização em Tempo Real**: Tabela atualizada automaticamente após operações
 
 ## Comandos para Executar o Projeto
 
@@ -170,14 +183,52 @@ mvn clean compile
 
 ### 2. Executar a aplicação
 
+**Versão Console (linha de comando):**
 ```bash
 mvn exec:java -Dexec.mainClass="com.example.Main"
 ```
 
+**OU (usando a classe padrão configurada no pom.xml):**
+```bash
+# Para Main.java
+mvn exec:java -Dexec.mainClass=com.example.Main
+```
+
+**Versão JavaFX (interface gráfica) - RECOMENDADO:**
+```bash
+mvn exec:java -Dexec.mainClass=com.example.MainFX
+```
+
+**OU (usando aspas, se necessário no Windows PowerShell):**
+```cmd
+mvn exec:java "-Dexec.mainClass=com.example.MainFX"
+```
+
+**Importante:** 
+- No **PowerShell (Windows)**, use aspas duplas: `mvn exec:java "-Dexec.mainClass=com.example.MainFX"`
+- No **CMD (Windows)**, não precisa de aspas: `mvn exec:java -Dexec.mainClass=com.example.MainFX`
+- No **Linux/macOS**, pode usar com ou sem aspas: `mvn exec:java -Dexec.mainClass=com.example.MainFX`
+
 ### 3. Compilar e executar em um único comando
 
+**Versão Console:**
 ```bash
-mvn clean compile exec:java -Dexec.mainClass="com.example.Main"
+mvn clean compile exec:java -Dexec.mainClass=com.example.Main
+```
+
+**Versão JavaFX:**
+```bash
+mvn clean compile exec:java -Dexec.mainClass=com.example.MainFX
+```
+
+**Windows PowerShell:**
+```powershell
+mvn clean compile exec:java "-Dexec.mainClass=com.example.MainFX"
+```
+
+**Windows CMD:**
+```cmd
+mvn clean compile exec:java -Dexec.mainClass=com.example.MainFX
 ```
 
 ### 4. Gerar JAR executável
@@ -190,6 +241,8 @@ Isso criará um JAR em `target/aulajava-1.0-SNAPSHOT.jar`
 
 ### 5. Executar o JAR
 
+**Versão Console (Main.java):**
+
 **Linux/macOS:**
 ```bash
 java -cp target/aulajava-1.0-SNAPSHOT.jar:target/dependency/* com.example.Main
@@ -197,31 +250,84 @@ java -cp target/aulajava-1.0-SNAPSHOT.jar:target/dependency/* com.example.Main
 
 **Windows:**
 ```cmd
+java -cp target\aulajava-1.0-SNAPSHOT.jar;target\dependency\* com.example.Main
+```
+
+**Versão JavaFX (MainFX.java) - Recomendado:**
+
+O JAR criado com `mvn package` usa `MainFX` como classe principal. Para executar:
+
+**Linux/macOS:**
+```bash
+java --module-path <caminho-javafx>/lib --add-modules javafx.controls,javafx.fxml -jar target/aulajava-1.0-SNAPSHOT.jar
+```
+
+**Windows:**
+```cmd
+java --module-path <caminho-javafx>\lib --add-modules javafx.controls,javafx.fxml -jar target\aulajava-1.0-SNAPSHOT.jar
+```
+
+**OU simplesmente (se JavaFX estiver no classpath):**
+```bash
+# Linux/macOS
+java -jar target/aulajava-1.0-SNAPSHOT.jar
+
+# Windows
 java -jar target\aulajava-1.0-SNAPSHOT.jar
 ```
 
-Ou usando o plugin exec:
+**Nota:** Se o JavaFX não estiver instalado no sistema, você pode baixá-lo em: https://openjfx.io/
+
+Ou usar o plugin exec:
 
 ```bash
-mvn exec:java
+# Console
+mvn exec:java -Dexec.mainClass=com.example.Main
+
+# JavaFX
+mvn exec:java -Dexec.mainClass=com.example.MainFX
 ```
 
-### 6. Executar no Windows (Script Automatizado)
+**Windows PowerShell:**
+```powershell
+# Console
+mvn exec:java "-Dexec.mainClass=com.example.Main"
 
-Use o script `run-windows.bat` que automatiza todo o processo:
+# JavaFX --executar este
+mvn exec:java "-Dexec.mainClass=com.example.MainFX"
+```
 
+**Windows CMD:**
+```cmd
+# Console
+mvn exec:java -Dexec.mainClass=com.example.Main
+
+# JavaFX
+mvn exec:java -Dexec.mainClass=com.example.MainFX
+```
+
+### 6. Executar no Windows (Scripts Automatizados)
+
+**Para executar JavaFX diretamente:**
+```cmd
+run-javafx.bat
+```
+Este script compila e executa a aplicação JavaFX diretamente.
+
+**Para criar JAR e executar (alternativa recomendada):**
 ```cmd
 run-windows.bat
 ```
-
 Este script:
 - Limpa o projeto
 - Atualiza as dependências
 - Compila o projeto
 - Cria um JAR com todas as dependências
-- Executa a aplicação
+- Executa a aplicação JavaFX (via JAR)
 
 ## Como Usar
+
+### Versão Console (Main.java)
 
 1. Execute a aplicação usando um dos comandos acima
 2. Escolha uma opção no menu:
@@ -229,6 +335,25 @@ Este script:
    - **2**: Listar todas as pessoas cadastradas
    - **3**: Buscar uma pessoa por ID
    - **4**: Sair da aplicação
+
+### Versão JavaFX (MainFX.java) - Interface Gráfica
+
+1. Execute a aplicação JavaFX usando um dos comandos acima
+2. A interface gráfica será aberta com:
+   - **Tabela superior**: Mostra todas as pessoas cadastradas
+   - **Formulário inferior**: Para cadastrar ou editar pessoas
+   - **Botões de ação**:
+     - **Novo**: Limpa o formulário para cadastrar nova pessoa
+     - **Salvar**: Salva a pessoa (cria nova ou atualiza existente)
+     - **Editar**: Habilita edição da pessoa selecionada na tabela
+     - **Excluir**: Remove a pessoa selecionada (com confirmação)
+     - **Cancelar**: Cancela a operação e limpa o formulário
+
+**Funcionalidades:**
+- Clique em uma pessoa na tabela para selecioná-la
+- Preencha o formulário e clique em "Salvar" para criar/atualizar
+- Validação automática de campos obrigatórios
+- Confirmação antes de excluir uma pessoa
 
 ## Banco de Dados
 
@@ -238,6 +363,7 @@ O banco de dados Nitrite é criado automaticamente como um arquivo local chamado
 
 - **Nitrite 3.4.4**: Banco de dados NoSQL embarcado
 - **Jackson 2.15.2**: Serialização JSON (usado pelo Nitrite)
+- **JavaFX 17.0.2**: Framework para interface gráfica (javafx-controls, javafx-fxml)
 
 ## Exemplo de Uso
 
@@ -269,6 +395,29 @@ rm pessoas.db
 ```
 
 ## Troubleshooting
+
+### Erro: "Unknown lifecycle phase" ou "You must specify a valid lifecycle phase"
+
+**Erro comum:** `[ERROR] Unknown lifecycle phase ".mainClass=com.example.MainFX"`
+
+**Causa:** Comando Maven incorreto. Você provavelmente executou algo como:
+```bash
+mvn .mainClass=com.example.MainFX  # ❌ ERRADO
+```
+
+**Solução:** Use o comando correto:
+```bash
+# Linux/macOS/CMD (Windows)
+mvn exec:java -Dexec.mainClass=com.example.MainFX  # ✅ CORRETO
+
+# PowerShell (Windows)
+mvn exec:java "-Dexec.mainClass=com.example.MainFX"  # ✅ CORRETO
+```
+
+**Importante:** 
+- O comando correto é: `mvn exec:java -Dexec.mainClass=...`
+- Não use: `mvn .mainClass=...` ou `mvn -Dexec.mainClass=...` (sem `exec:java`)
+- No PowerShell, coloque a opção `-Dexec.mainClass=...` entre aspas duplas
 
 ### Erro: `NoClassDefFoundError: com/fasterxml/jackson/annotation/JsonKey` (Windows)
 
