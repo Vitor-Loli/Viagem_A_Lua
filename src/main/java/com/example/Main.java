@@ -31,7 +31,7 @@ public class Main {
             System.out.println("1 - Adicionar pessoa");
             System.out.println("2 - Listar todas as pessoas");
             System.out.println("3 - Buscar pessoa por ID");
-            System.out.println("4 - Sair");
+            System.out.println("0 - Sair");
 
             System.out.print("Opção: ");
             String opcao = scanner.nextLine();
@@ -46,7 +46,7 @@ public class Main {
                 case "3":
                     buscarPessoaPorId(scanner);
                     break;
-                case "4":
+                case "0":
                     continuar = false;
                     System.out.println("Encerrando...");
                     break;

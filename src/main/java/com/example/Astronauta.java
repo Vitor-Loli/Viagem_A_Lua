@@ -48,16 +48,13 @@ public class Astronauta {
     public void setHorasDeVoo(String horasDeVoo) {
         this.horasDeVoo = horasDeVoo;
     }
-    
+
     @Override
     public String toString() {
-        return "Astronauta{" +
-                "id='" + id + '\'' +
-                ", nome='" + nome + '\'' +
-                ", idade=" + idade +
-                ", especialidade='" + especialidade + '\'' +
-                ", horasDeVoo='" + horasDeVoo + '\'' +
-                '}';
+        return  '[' + id + ']' + nome + '\n' +
+                "Idade:" + idade +
+                "Especialidade:" + especialidade + '\n' +
+                "Horas de voo:" + horasDeVoo + '\n';
     }
 
 }
