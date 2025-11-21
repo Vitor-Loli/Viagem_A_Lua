@@ -1,11 +1,15 @@
 package com.example;
 
-public class Astronauta {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Astronauta implements Serializable{
     private String id;
     private String nome;
     private int idade;
     private String especialidade;
     private String horasDeVoo;
+    private boolean disponivel;
 
 
     public Astronauta() {
@@ -16,6 +20,7 @@ public class Astronauta {
         this.idade = idade;
         this.especialidade = especialidade;
         this.horasDeVoo = horasDeVoo;
+        this.disponivel = true;
     }
 
     public String getId() {
@@ -47,6 +52,12 @@ public class Astronauta {
     }
     public void setHorasDeVoo(String horasDeVoo) {
         this.horasDeVoo = horasDeVoo;
+    }
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
     }
 
     @Override
