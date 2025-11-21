@@ -1,35 +1,39 @@
-# Projeto Java com Nitrite
+# 🌕 Sistema de Controle de Missões Lunares
 
-Projeto básico em Java usando Maven que persiste pessoas em um banco de dados Nitrite.
+## 🛰️ Sobre o Projeto
+O **Sistema de Controle de Missões Lunares** é uma aplicação desenvolvida em **Java**, que simula parte das operações de uma agência espacial fictícia chamada **Lunar Systems**.  
+O objetivo principal é registrar, organizar e consultar informações sobre **missões espaciais com destino à Lua**, incluindo **astronautas**, **naves espaciais** e **resultados científicos** de cada expedição.
 
-## Requisitos
+O projeto enfatiza a **persistência de dados** de duas formas distintas:
+1. **Serialização Java (arquivo binário)**  
+2. **NitriteDB (banco de dados NoSQL embarcado)**
 
-- Java 11 ou superior
-- Maven 3.6 ou superior
+---
 
-## Instalação do Maven
+## 🎯 Objetivos
+- Desenvolver uma aplicação simples em **Java orientada a objetos**.  
+- Modelar entidades relacionadas ao domínio espacial (missões, astronautas, naves).  
+- Implementar **duas abordagens de persistência** (Serialização e NitriteDB).  
+- Garantir o registro, consulta e controle de informações sobre as missões lunares.
 
-### macOS
+---
 
-#### Opção 1: Usando Homebrew (Recomendado)
+## 🧩 Entidades Principais
 
-```bash
-# Instalar Homebrew (se não tiver)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+### 🚀 Classe `Missao`
+Representa uma viagem específica à Lua.  
+**Atributos principais:**
 
-# Instalar Maven
-brew install maven
 
-# Verificar instalação
-mvn -version
-```
+### 👨‍🚀 Classe `Astronauta`
+Representa um profissional participante da missão.  
 
-#### Opção 2: Instalação Manual
 
-1. Baixe o Maven do site oficial: https://maven.apache.org/download.cgi
-2. Extraia o arquivo em um diretório (ex: `/usr/local/apache-maven`)
-3. Configure as variáveis de ambiente no arquivo `~/.zshrc` ou `~/.bash_profile`:
+### 🛸 Classe `Nave`
+Representa o veículo espacial usado nas missões.  
+ 
 
+<<<<<<< HEAD
 ```bash
 export MAVEN_HOME=/usr/local/apache-maven
 export PATH=$MAVEN_HOME/bin:$PATH
@@ -513,4 +517,17 @@ java -cp "target/classes;target/dependency/*" com.example.Main
 - Cada pessoa recebe um ID único gerado automaticamente (UUID)
 - Os dados são persistidos no arquivo `pessoas.db` na raiz do projeto
 - **Windows**: Recomenda-se usar o JAR com dependências (`mvn package`) em vez de `mvn exec:java` para evitar problemas de classpath
+=======
+---
+>>>>>>> ced69d1ffbd1f05f7255cdca70a44024576a07f1
 
+## ⚙️ Regras de Negócio
+1. Cada **missão** deve ter um **código único**.  
+2. A **nave** deve ser **compatível com o número de tripulantes** da missão.  
+3. Um **astronauta** deve ter **idade mínima de 21 anos** para participar.  
+4. As missões devem armazenar **data de lançamento e retorno**, permitindo o **cálculo da duração**.  
+5. Cada nova missão deve ser **persistida** tanto via **Serialização** quanto via **NitriteDB**.  
+6. O sistema deve permitir:
+   - Listar todas as missões registradas;  
+   - Buscar astronautas por nome ou especialidade;  
+   - Registrar e consultar resultados científicos.  

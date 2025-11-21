@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Classe principal que gerencia a persistência de pessoas no banco Nitrite
+ * Classe principal que gerencia a persistência de pessoas no banco Nitritegit
  */
 public class Main {
     private static PersonService personService;
