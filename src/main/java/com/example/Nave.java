@@ -31,7 +31,7 @@ public abstract class Nave implements Serializable {
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
-    public boolean getDisponivel() {
+    public boolean isDisponivel() {
         return disponivel;
     }
     public void setDisponivel(boolean disponivel) {
