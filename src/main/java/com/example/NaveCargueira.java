@@ -2,21 +2,24 @@ package com.example;
 
 public class NaveCargueira extends Nave {
     private double capacidadeCarga;
-    private int capacidadeTripulantes;
 
     public NaveCargueira(){
-
     }
-    public NaveCargueira(String id, String modelo,double capacidadeCarga, int capacidadeTripulantes) {
+    public NaveCargueira(String id, String modelo,double capacidadeCarga) {
         super(id, modelo, true);
         this.capacidadeCarga = capacidadeCarga;
-        this.capacidadeTripulantes = capacidadeTripulantes;
+    }
+
+    public double getCapacidadeCarga() {
+        return capacidadeCarga;
+    }
+    public void setCapacidadeCarga(double capacidadeCarga) {
+        this.capacidadeCarga = capacidadeCarga;
     }
 
     @Override
     public String toString(){
         super.toString();
-        return "\nCapacidade de Carga " + this.capacidadeCarga + " KG" +
-                "\nCapacidade de Tripulantes " + this.capacidadeTripulantes + " Pessoas";
+        return "Capacidade de Carga " + this.capacidadeCarga + " KG";
     }
 }

@@ -10,9 +10,7 @@ public abstract class Nave implements Serializable {
     private boolean disponivel;
 
     public Nave(){
-
     }
-
     public Nave(String id, String modelo, boolean disponivel) {
         this.id = id;
         this.modelo = modelo;
@@ -37,7 +35,9 @@ public abstract class Nave implements Serializable {
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
     }
+
+    @Override
     public String toString() {
-        return "[" + id + "] " + this.modelo + "\n disponivel" + (this.disponivel ? "DISPONIVEL" : "INDISPONIVEL") ;
+        return "[" + id + "] " + this.getModelo() + "\n" + (this.disponivel ? "DISPONIVEL" : "INDISPONIVEL") + "\n";
     }
 }
