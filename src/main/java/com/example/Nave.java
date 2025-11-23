@@ -7,14 +7,13 @@ public abstract class Nave implements Serializable {
 
     private String id;
     private String modelo;
-    private boolean disponivel;
+    private boolean disponivel = true;
 
     public Nave(){
     }
-    public Nave(String id, String modelo, boolean disponivel) {
+    public Nave(String id, String modelo) {
         this.id = id;
         this.modelo = modelo;
-        this.disponivel = disponivel;
     }
 
     public String getId() {

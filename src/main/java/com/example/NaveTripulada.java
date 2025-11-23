@@ -6,7 +6,7 @@ public class NaveTripulada extends Nave {
     public NaveTripulada() {
     }
     public NaveTripulada(String id, String modelo,int capacidadeTripulantes) {
-        super(id, modelo, true);
+        super(id, modelo);
         this.capacidadeTripulantes = capacidadeTripulantes;
     }
 
