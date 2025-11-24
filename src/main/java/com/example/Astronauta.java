@@ -13,12 +13,12 @@ public class Astronauta implements Serializable {
 
     public Astronauta() {
     }
-    public Astronauta(String id, String nome, int idade, String especialidade, String horasDeVoo) {
+    public Astronauta(String id, String nome, int idade, String especialidade) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.especialidade = especialidade;
-        this.horasDeVoo = horasDeVoo;
+        this.horasDeVoo = "Nenhum";
         this.disponivel = true;
     }
 

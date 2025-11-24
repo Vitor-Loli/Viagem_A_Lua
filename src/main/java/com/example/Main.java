@@ -13,9 +13,9 @@ import java.util.UUID;
  * Classe principal que gerencia a persistência de pessoas no banco Nitritegit
  */
 public class Main {
-    private static final String DB_PATH = "pessoas.db";
+    private static final String DB_PATH = "astronauta.db";
     private static Nitrite db;
-    private static ObjectRepository<Person> personRepository;
+    private static ObjectRepository<Astronauta> astronautaRepository;
 
     public static void main(String[] args) {
         initializeDatabase();
@@ -68,7 +68,7 @@ public class Main {
                     .filePath(DB_PATH)
                     .openOrCreate();
 
-            personRepository = db.getRepository(Person.class);
+            astronautaRepository = db.getRepository(Astronauta.class);
             System.out.println("Banco de dados inicializado com sucesso!");
         } catch (Exception e) {
             System.err.println("Erro ao inicializar o banco de dados: " + e.getMessage());
@@ -90,13 +90,13 @@ public class Main {
             System.out.print("Idade: ");
             int idade = Integer.parseInt(scanner.nextLine());
             
-            System.out.print("Email: ");
-            String email = scanner.nextLine();
+            System.out.print("Especialidade: ");
+            String especialidade = scanner.nextLine();
 
             String id = UUID.randomUUID().toString();
-            Person person = new Person(id, nome, idade, email);
+            Astronauta astronauta = new Astronauta(id, nome, idade, especialidade);
             
-            personRepository.insert(person);
+            astronautaRepository.insert(astronauta);
             System.out.println("Pessoa adicionada com sucesso! ID: " + id);
         } catch (NumberFormatException e) {
             System.err.println("Erro: Idade deve ser um número válido!");
@@ -112,14 +112,14 @@ public class Main {
     private static void listarPessoas() {
         try {
             System.out.println("\n=== Lista de Pessoas ===");
-            List<Person> pessoas = personRepository.find().toList();
+            List<Astronauta> pessoas = astronautaRepository.find().toList();
             
             if (pessoas.isEmpty()) {
                 System.out.println("Nenhuma pessoa cadastrada.");
             } else {
                 System.out.println("Total de pessoas: " + pessoas.size());
-                for (Person person : pessoas) {
-                    System.out.println(person);
+                for (Astronauta astronauta : pessoas) {
+                    System.out.println(astronauta);
                 }
             }
         } catch (Exception e) {
@@ -137,11 +137,11 @@ public class Main {
             System.out.print("Digite o ID: ");
             String id = scanner.nextLine();
 
-            Person person = personRepository.find(ObjectFilters.eq("id", id)).firstOrDefault();
+            Astronauta astronauta = astronautaRepository.find(ObjectFilters.eq("id", id)).firstOrDefault();
             
-            if (person != null) {
+            if (astronauta != null) {
                 System.out.println("Pessoa encontrada:");
-                System.out.println(person);
+                System.out.println(astronauta);
             } else {
                 System.out.println("Pessoa não encontrada com ID: " + id);
             }
