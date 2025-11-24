@@ -64,7 +64,8 @@ public class Astronauta implements Serializable{
         return  '[' + id + ']' + nome + '\n' +
                 "Idade:" + idade +
                 "Especialidade:" + especialidade + '\n' +
-                "Horas de voo:" + horasDeVoo + '\n';
+                "Horas de voo:" + horasDeVoo + '\n' +
+                (this.disponivel ? "DISPONIVEL" : "INDISPONIVEL");
     }
 
 }
