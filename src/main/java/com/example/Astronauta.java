@@ -1,9 +1,11 @@
 package com.example;
 
 import java.io.Serializable;
+import org.dizitart.no2.objects.Id;
 
 public class Astronauta implements Serializable {
-    private String id;
+    @Id
+    private int id;
     private String nome;
     private int idade;
     private String especialidade;
@@ -13,7 +15,7 @@ public class Astronauta implements Serializable {
 
     public Astronauta() {
     }
-    public Astronauta(String id, String nome, int idade, String especialidade) {
+    public Astronauta(int id, String nome, int idade, String especialidade) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -22,10 +24,10 @@ public class Astronauta implements Serializable {
         this.disponivel = true;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getNome() {

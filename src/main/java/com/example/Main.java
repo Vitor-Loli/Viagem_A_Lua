@@ -18,13 +18,13 @@ public class Main {
     private static ObjectRepository<Astronauta> astronautaRepository;
 
     public static void main(String[] args) {
-        initializeDatabase();
-        
         Scanner scanner = new Scanner(System.in);
+        Gerenciador gerenciador = new Gerenciador(scanner);
+        
+
         boolean continuar = true;
 
         System.out.println("=== Sistema de Gerenciamento de Pessoas ===");
-        System.out.println("Banco de dados: " + DB_PATH);
 
         while (continuar) {
             System.out.println("\nEscolha uma opção:");
@@ -38,13 +38,13 @@ public class Main {
 
             switch (opcao) {
                 case "1":
-                    adicionarAstronauta(scanner);
+                    gerenciador.cadAstronauta();
                     break;
                 case "2":
-                    listarAstronautas();
+                    gerenciador.listarAstronautas();
                     break;
                 case "3":
-                    buscarAstronautaPorId(scanner);
+
                     break;
                 case "0":
                     continuar = false;
@@ -56,114 +56,7 @@ public class Main {
         }
 
         scanner.close();
-        closeDatabase();
-    }
+    }}
 
-    /**
-     * Inicializa o banco de dados Nitrite
-     */
-    private static void initializeDatabase() {
-        try {
-            db = Nitrite.builder()
-                    .filePath(DB_PATH)
-                    .openOrCreate();
 
-            astronautaRepository = db.getRepository(Astronauta.class);
-            System.out.println("Banco de dados inicializado com sucesso!");
-        } catch (Exception e) {
-            System.err.println("Erro ao inicializar o banco de dados: " + e.getMessage());
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
-
-    /**
-     * Adiciona uma nova pessoa ao banco de dados
-     */
-    private static void adicionarAstronauta(Scanner scanner) {
-        try {
-            System.out.println("\n=== Adicionar Nova Pessoa ===");
-            
-            System.out.print("Nome: ");
-            String nome = scanner.nextLine();
-            
-            System.out.print("Idade: ");
-            int idade = Integer.parseInt(scanner.nextLine());
-            
-            System.out.print("Especialidade: ");
-            String especialidade = scanner.nextLine();
-
-            String id = UUID.randomUUID().toString();
-            Astronauta astronauta = new Astronauta(id, nome, idade, especialidade);
-            
-            astronautaRepository.insert(astronauta);
-            System.out.println("Pessoa adicionada com sucesso! ID: " + id);
-        } catch (NumberFormatException e) {
-            System.err.println("Erro: Idade deve ser um número válido!");
-        } catch (Exception e) {
-            System.err.println("Erro ao adicionar pessoa: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Lista todas as pessoas do banco de dados
-     */
-    private static void listarAstronautas() {
-        try {
-            System.out.println("\n=== Lista de Pessoas ===");
-            List<Astronauta> pessoas = astronautaRepository.find().toList();
-            
-            if (pessoas.isEmpty()) {
-                System.out.println("Nenhuma pessoa cadastrada.");
-            } else {
-                System.out.println("Total de pessoas: " + pessoas.size());
-                for (Astronauta astronauta : pessoas) {
-                    System.out.println(astronauta);
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("Erro ao listar pessoas: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Busca uma pessoa por ID
-     */
-    private static void buscarAstronautaPorId(Scanner scanner) {
-        try {
-            System.out.println("\n=== Buscar Pessoa por ID ===");
-            System.out.print("Digite o ID: ");
-            String id = scanner.nextLine();
-
-            Astronauta astronauta = astronautaRepository.find(ObjectFilters.eq("id", id)).firstOrDefault();
-            
-            if (astronauta != null) {
-                System.out.println("Pessoa encontrada:");
-                System.out.println(astronauta);
-            } else {
-                System.out.println("Pessoa não encontrada com ID: " + id);
-            }
-        } catch (Exception e) {
-            System.err.println("Erro ao buscar pessoa: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Fecha o banco de dados
-     */
-    private static void closeDatabase() {
-        try {
-            if (db != null && !db.isClosed()) {
-                db.close();
-                System.out.println("Banco de dados fechado com sucesso!");
-            }
-        } catch (Exception e) {
-            System.err.println("Erro ao fechar o banco de dados: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-}
 
