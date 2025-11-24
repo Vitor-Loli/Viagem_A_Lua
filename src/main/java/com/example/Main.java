@@ -13,9 +13,9 @@ import java.util.UUID;
  * Classe principal que gerencia a persistência de pessoas no banco Nitritegit
  */
 public class Main {
-    private static final String DB_PATH = "pessoas.db";
+    private static final String DB_PATH = "astronauta.db";
     private static Nitrite db;
-    private static ObjectRepository<Person> personRepository;
+    private static ObjectRepository<Astronauta> astronautaRepository;
 
     public static void main(String[] args) {
         initializeDatabase();
@@ -28,9 +28,9 @@ public class Main {
 
         while (continuar) {
             System.out.println("\nEscolha uma opção:");
-            System.out.println("1 - Adicionar pessoa");
-            System.out.println("2 - Listar todas as pessoas");
-            System.out.println("3 - Buscar pessoa por ID");
+            System.out.println("1 - Adicionar astronauta");
+            System.out.println("2 - Listar todas os astronautas");
+            System.out.println("3 - Buscar astronauta por ID");
             System.out.println("0 - Sair");
 
             System.out.print("Opção: ");
@@ -38,13 +38,13 @@ public class Main {
 
             switch (opcao) {
                 case "1":
-                    adicionarPessoa(scanner);
+                    adicionarAstronauta(scanner);
                     break;
                 case "2":
-                    listarPessoas();
+                    listarAstronautas();
                     break;
                 case "3":
-                    buscarPessoaPorId(scanner);
+                    buscarAstronautaPorId(scanner);
                     break;
                 case "0":
                     continuar = false;
@@ -68,7 +68,7 @@ public class Main {
                     .filePath(DB_PATH)
                     .openOrCreate();
 
-            personRepository = db.getRepository(Person.class);
+            astronautaRepository = db.getRepository(Astronauta.class);
             System.out.println("Banco de dados inicializado com sucesso!");
         } catch (Exception e) {
             System.err.println("Erro ao inicializar o banco de dados: " + e.getMessage());
@@ -80,7 +80,7 @@ public class Main {
     /**
      * Adiciona uma nova pessoa ao banco de dados
      */
-    private static void adicionarPessoa(Scanner scanner) {
+    private static void adicionarAstronauta(Scanner scanner) {
         try {
             System.out.println("\n=== Adicionar Nova Pessoa ===");
             
@@ -90,13 +90,13 @@ public class Main {
             System.out.print("Idade: ");
             int idade = Integer.parseInt(scanner.nextLine());
             
-            System.out.print("Email: ");
-            String email = scanner.nextLine();
+            System.out.print("Especialidade: ");
+            String especialidade = scanner.nextLine();
 
             String id = UUID.randomUUID().toString();
-            Person person = new Person(id, nome, idade, email);
+            Astronauta astronauta = new Astronauta(id, nome, idade, especialidade);
             
-            personRepository.insert(person);
+            astronautaRepository.insert(astronauta);
             System.out.println("Pessoa adicionada com sucesso! ID: " + id);
         } catch (NumberFormatException e) {
             System.err.println("Erro: Idade deve ser um número válido!");
@@ -109,17 +109,17 @@ public class Main {
     /**
      * Lista todas as pessoas do banco de dados
      */
-    private static void listarPessoas() {
+    private static void listarAstronautas() {
         try {
             System.out.println("\n=== Lista de Pessoas ===");
-            List<Person> pessoas = personRepository.find().toList();
+            List<Astronauta> pessoas = astronautaRepository.find().toList();
             
             if (pessoas.isEmpty()) {
                 System.out.println("Nenhuma pessoa cadastrada.");
             } else {
                 System.out.println("Total de pessoas: " + pessoas.size());
-                for (Person person : pessoas) {
-                    System.out.println(person);
+                for (Astronauta astronauta : pessoas) {
+                    System.out.println(astronauta);
                 }
             }
         } catch (Exception e) {
@@ -131,17 +131,17 @@ public class Main {
     /**
      * Busca uma pessoa por ID
      */
-    private static void buscarPessoaPorId(Scanner scanner) {
+    private static void buscarAstronautaPorId(Scanner scanner) {
         try {
             System.out.println("\n=== Buscar Pessoa por ID ===");
             System.out.print("Digite o ID: ");
             String id = scanner.nextLine();
 
-            Person person = personRepository.find(ObjectFilters.eq("id", id)).firstOrDefault();
+            Astronauta astronauta = astronautaRepository.find(ObjectFilters.eq("id", id)).firstOrDefault();
             
-            if (person != null) {
+            if (astronauta != null) {
                 System.out.println("Pessoa encontrada:");
-                System.out.println(person);
+                System.out.println(astronauta);
             } else {
                 System.out.println("Pessoa não encontrada com ID: " + id);
             }
