@@ -2,7 +2,7 @@ package com.example;
 
 import java.io.Serializable;
 
-public class Astronauta implements Serializable{
+public class Astronauta implements Serializable {
     private String id;
     private String nome;
     private int idade;
