@@ -28,9 +28,9 @@ public class Main {
 
         while (continuar) {
             System.out.println("\nEscolha uma opção:");
-            System.out.println("1 - Adicionar pessoa");
-            System.out.println("2 - Listar todas as pessoas");
-            System.out.println("3 - Buscar pessoa por ID");
+            System.out.println("1 - Adicionar astronauta");
+            System.out.println("2 - Listar todas os astronautas");
+            System.out.println("3 - Buscar astronauta por ID");
             System.out.println("0 - Sair");
 
             System.out.print("Opção: ");
@@ -38,13 +38,13 @@ public class Main {
 
             switch (opcao) {
                 case "1":
-                    adicionarPessoa(scanner);
+                    adicionarAstronauta(scanner);
                     break;
                 case "2":
-                    listarPessoas();
+                    listarAstronautas();
                     break;
                 case "3":
-                    buscarPessoaPorId(scanner);
+                    buscarAstronautaPorId(scanner);
                     break;
                 case "0":
                     continuar = false;
@@ -80,7 +80,7 @@ public class Main {
     /**
      * Adiciona uma nova pessoa ao banco de dados
      */
-    private static void adicionarPessoa(Scanner scanner) {
+    private static void adicionarAstronauta(Scanner scanner) {
         try {
             System.out.println("\n=== Adicionar Nova Pessoa ===");
             
@@ -109,7 +109,7 @@ public class Main {
     /**
      * Lista todas as pessoas do banco de dados
      */
-    private static void listarPessoas() {
+    private static void listarAstronautas() {
         try {
             System.out.println("\n=== Lista de Pessoas ===");
             List<Astronauta> pessoas = astronautaRepository.find().toList();
@@ -131,7 +131,7 @@ public class Main {
     /**
      * Busca uma pessoa por ID
      */
-    private static void buscarPessoaPorId(Scanner scanner) {
+    private static void buscarAstronautaPorId(Scanner scanner) {
         try {
             System.out.println("\n=== Buscar Pessoa por ID ===");
             System.out.print("Digite o ID: ");
