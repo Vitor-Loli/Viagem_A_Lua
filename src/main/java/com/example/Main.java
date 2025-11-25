@@ -48,6 +48,7 @@ public class Main {
                     break;
                 case "0":
                     continuar = false;
+                    db.close();
                     System.out.println("Encerrando...");
                     break;
                 default:
@@ -56,6 +57,7 @@ public class Main {
         }
 
         scanner.close();
+        db.close();
     }}
 
 
