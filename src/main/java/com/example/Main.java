@@ -46,7 +46,8 @@ public class Main {
                 case "3":
                     gerenciador.cadNave();
                     break;
-                case 4:
+                case "4":
+                    gerenciador.listarNaves();
                     break;
                 case "0":
                     continuar = false;

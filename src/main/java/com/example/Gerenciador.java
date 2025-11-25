@@ -41,10 +41,10 @@ public class Gerenciador {
     }
 
     public void cadNave() {
-        int opc = 0;
+        boolean flag = true;
         do{
             System.out.println("Informe o tipo da nave: \n[1] - Nave de Tripulantes\n[2] - Nave Cargueira");
-            opc = scanner.nextInt();
+            int opc = scanner.nextInt();
             scanner.nextLine();
             System.out.println("Informe o modelo da nave: ");
             String modelo = scanner.nextLine();
@@ -69,7 +69,7 @@ public class Gerenciador {
                     break;
                 case 2:
                     System.out.println("Informe a capacidade máxima de carga: ");
-                    double capacidadeCarga =scanner.nextInt();
+                    double capacidadeCarga =scanner.nextDouble();
                     scanner.nextLine();
 
                      id = 0;
@@ -87,7 +87,7 @@ public class Gerenciador {
                     default:
                         System.out.println("Opção invalida");
             }
-        }while(opc == 1 || opc == 2);
+        }while(flag);
     }
     public void listarNaves(){
         for (Nave n : nave.find()) {
