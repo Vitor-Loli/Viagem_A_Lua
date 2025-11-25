@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class Gerenciador {
     private Scanner scanner;
     ObjectRepository<Astronauta> astronauta = Banco.repositorio(Astronauta.class);
-    ObjectRepository<Nave> nave = Banco.repositorio(Nave.class);
+    ObjectRepository<NaveTripulada> naveTripulada = Banco.repositorio(NaveTripulada.class);
+    ObjectRepository<NaveCargueira> naveCargueira = Banco.repositorio(NaveCargueira.class);
     ObjectRepository<MissaoEspacial> missao = Banco.repositorio(MissaoEspacial.class);
 
 
@@ -57,7 +58,7 @@ public class Gerenciador {
 
                     int id = 0;
 
-                    for (Nave n : nave.find()) {
+                    for (Nave n : naveTripulada.find()) {
                         if (n.getId() > id) {
                             id = n.getId();
                         }
@@ -65,7 +66,8 @@ public class Gerenciador {
 
                     id += 1;
 
-                    nave.insert(new NaveTripulada(id , modelo, capacidadeTripulantes));
+                    naveTripulada.insert(new NaveTripulada(id , modelo, capacidadeTripulantes));
+                    flag = false;
                     break;
                 case 2:
                     System.out.println("Informe a capacidade máxima de carga: ");
@@ -74,7 +76,7 @@ public class Gerenciador {
 
                      id = 0;
 
-                    for (Nave n : nave.find()) {
+                    for (Nave n : naveCargueira.find()) {
                         if (n.getId() > id) {
                             id = n.getId();
                         }
@@ -82,7 +84,8 @@ public class Gerenciador {
 
                     id += 1;
 
-                    nave.insert(new NaveCargueira(id , modelo, capacidadeCarga));
+                    naveCargueira.insert(new NaveCargueira(id , modelo, capacidadeCarga));
+                    flag = false;
                     break;
                     default:
                         System.out.println("Opção invalida");
@@ -90,7 +93,10 @@ public class Gerenciador {
         }while(flag);
     }
     public void listarNaves(){
-        for (Nave n : nave.find()) {
+        for (Nave n : naveTripulada.find()) {
+            System.out.println(n.toString());
+        }
+        for (Nave n : naveCargueira.find()) {
             System.out.println(n.toString());
         }
     }
