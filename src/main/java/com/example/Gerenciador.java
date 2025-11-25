@@ -101,8 +101,8 @@ public class Gerenciador {
         }
     }
 
-    public void cadMissaoEspacial(MissaoEspacial m) {
-        missao.insert(m);
+    public void cadMissaoEspacial() {
+        
     }
 
 }

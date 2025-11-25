@@ -19,7 +19,6 @@ public class NaveCargueira extends Nave {
 
     @Override
     public String toString(){
-        super.toString();
-        return "Capacidade de Carga " + this.capacidadeCarga + " KG";
+        return super.toString() + " Capacidade de Carga " + this.capacidadeCarga + " KG";
     }
 }
