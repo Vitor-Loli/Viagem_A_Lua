@@ -7,7 +7,10 @@ public class Banco {
 
     private static Nitrite db;
 
-    // Abre (ou cria) o banco sempre com usuário e senha
+    public Banco(){
+        this.conectar();
+    }
+
     public static Nitrite conectar() {
         if (db == null) {
             db = Nitrite.builder()
@@ -17,8 +20,18 @@ public class Banco {
         return db;
     }
 
-    // Retorna um repositório (tabela) baseado na classe
     public static <T> ObjectRepository<T> repositorio(Class<T> classe) {
         return conectar().getRepository(classe);
+    }
+
+    public static void fecharBanco() {
+        if (db != null && !db.isClosed()) {
+            try {
+                db.close();
+                System.out.println("Banco Nitrite encerrado com sucesso.");
+            } catch (Exception e) {
+                System.out.println("Falha ao encerrar banco Nitrite: " + e.getMessage());
+            }
+        }
     }
 }

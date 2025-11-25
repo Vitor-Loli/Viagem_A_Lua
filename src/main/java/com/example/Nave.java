@@ -1,25 +1,28 @@
 package com.example;
 import java.io.Serializable;
 
+import org.dizitart.no2.objects.Id;
+
 public abstract class Nave implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    private String id;
+    @Id
+    private int id;
     private String modelo;
     private boolean disponivel = true;
 
     public Nave(){
     }
-    public Nave(String id, String modelo) {
+    public Nave(int id, String modelo) {
         this.id = id;
         this.modelo = modelo;
+        this.disponivel = true;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getModelo() {

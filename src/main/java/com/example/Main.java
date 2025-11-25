@@ -13,14 +13,13 @@ import java.util.UUID;
  * Classe principal que gerencia a persistência de pessoas no banco Nitritegit
  */
 public class Main {
-    private static final String DB_PATH = "astronauta.db";
     private static Nitrite db;
-    private static ObjectRepository<Astronauta> astronautaRepository;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Gerenciador gerenciador = new Gerenciador(scanner);
-        
+        Banco banco = new Banco();
+
 
         boolean continuar = true;
 
@@ -30,7 +29,8 @@ public class Main {
             System.out.println("\nEscolha uma opção:");
             System.out.println("1 - Adicionar astronauta");
             System.out.println("2 - Listar todas os astronautas");
-            System.out.println("3 - Buscar astronauta por ID");
+            System.out.println("3 - Adicionar Nave");
+            System.out.println("4 - Listar todas as naves");
             System.out.println("0 - Sair");
 
             System.out.print("Opção: ");
@@ -44,11 +44,12 @@ public class Main {
                     gerenciador.listarAstronautas();
                     break;
                 case "3":
-
+                    gerenciador.cadNave();
+                    break;
+                case 4:
                     break;
                 case "0":
                     continuar = false;
-                    db.close();
                     System.out.println("Encerrando...");
                     break;
                 default:
@@ -57,7 +58,7 @@ public class Main {
         }
 
         scanner.close();
-        db.close();
+        banco.fecharBanco();
     }}
 
 

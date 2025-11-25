@@ -5,7 +5,7 @@ public class NaveCargueira extends Nave {
 
     public NaveCargueira(){
     }
-    public NaveCargueira(String id, String modelo,double capacidadeCarga) {
+    public NaveCargueira(int id, String modelo,double capacidadeCarga) {
         super(id, modelo);
         this.capacidadeCarga = capacidadeCarga;
     }
