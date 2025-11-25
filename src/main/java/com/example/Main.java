@@ -25,20 +25,21 @@ public class Main {
         System.out.println("=== Sistema de Gerenciamento de Pessoas ===");
 
         while (continuar) {
-            System.out.println("\n============ MENU ============\n" +
+            System.out.println("\n=============== MENU ===============\n" +
 			                   "[1] - Cadastrar novo astronauta\n" +
 			                   "[2] - Listar astronautas\n" +
+                               "[3] - Excluir astronauta\n" +
+			                   "------------------------------------\n" +
+			                   "[4] - Cadastrar nova nave\n" +
+			                   "[5] - Listar todas as naves\n" +
+                               "[6] - Excluir nave\n" +
 			                   "------------------------------\n" +
-			                   "[3] - Cadastrar nova nava\n" +
-			                   "[4] - Listar todas as naves\n" +
-			                   "------------------------------\n" +
-			                   "[5] - Realizar locacao\n" +
-			                   "[6] - Devolucao de midia\n" +
-			                   "[7] - Listar historico de locacoes\n" +
-			                   "------------------------------\n" +
-			                   "[8] - Mostrar total arrecadado\n" +
+			                   "[7] - Iniciar nova missão espacial\n" +
+			                   "[8] - Finalizar missão espacial\n" +
+			                   "[9] - Historico de missões espaciais\n" +
+			                   "------------------------------------\n" +
 			                   "[0] - Sair\n" +
-			                   "==============================");
+			                   "====================================\n");
 
             System.out.print("Opção: ");
             String opcao = scanner.nextLine();
@@ -51,10 +52,25 @@ public class Main {
                     gerenciador.listarAstronautas();
                     break;
                 case "3":
-                    gerenciador.cadNave();
+                    //gerenciador.excluirAstronauta();
                     break;
                 case "4":
+                    gerenciador.cadNave();
+                    break;
+                case "5":
                     gerenciador.listarNaves();
+                    break;
+                case "6":
+                    //gerenciador.excluirNave();
+                    break;
+                case "7":
+                    //gerenciador.iniciarMissao();
+                    break;
+                case "8":
+                    //gerenciador.finalizarMissao();
+                    break; 
+                case "9":
+                    //gerenciador.historicoMissoes();
                     break;
                 case "0":
                     continuar = false;
