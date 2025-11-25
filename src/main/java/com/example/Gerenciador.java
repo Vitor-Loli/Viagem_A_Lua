@@ -15,11 +15,12 @@ public class Gerenciador {
     }
 
     public void cadAstronauta() {
-        System.out.println("Iforme o nome do Astronauta: ");
+        System.out.println("Informe o nome do Astronauta: ");
         String nome =scanner.nextLine();
-        System.out.println("Iforme a idade do Astronauta: ");
+        System.out.println("Informe a idade do Astronauta: ");
         int idade =scanner.nextInt();
-        System.out.println("Iforme a especialidade do Astronauta: ");
+        scanner.nextLine();
+        System.out.println("Informe a especialidade do Astronauta: ");
         String especialidade =scanner.nextLine();
         int id = 0;
 
