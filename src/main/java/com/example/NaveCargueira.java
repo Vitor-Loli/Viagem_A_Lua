@@ -5,7 +5,7 @@ public class NaveCargueira extends Nave {
 
     public NaveCargueira(){
     }
-    public NaveCargueira(String id, String modelo,double capacidadeCarga) {
+    public NaveCargueira(int id, String modelo,double capacidadeCarga) {
         super(id, modelo);
         this.capacidadeCarga = capacidadeCarga;
     }
@@ -19,7 +19,6 @@ public class NaveCargueira extends Nave {
 
     @Override
     public String toString(){
-        super.toString();
-        return "Capacidade de Carga " + this.capacidadeCarga + " KG";
+        return super.toString() + " Capacidade de Carga " + this.capacidadeCarga + " KG";
     }
 }

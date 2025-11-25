@@ -5,7 +5,7 @@ public class NaveTripulada extends Nave {
 
     public NaveTripulada() {
     }
-    public NaveTripulada(String id, String modelo,int capacidadeTripulantes) {
+    public NaveTripulada(int id, String modelo,int capacidadeTripulantes) {
         super(id, modelo);
         this.capacidadeTripulantes = capacidadeTripulantes;
     }
@@ -19,7 +19,7 @@ public class NaveTripulada extends Nave {
 
     @Override
     public String toString(){
-        super.toString();
-        return  "Capacidade de Tripulantes" + this.capacidadeTripulantes + " Pessoas";
+
+        return super.toString() +  " Capacidade de Tripulantes" + this.capacidadeTripulantes + " Pessoas";
     }
 }
