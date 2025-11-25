@@ -20,18 +20,25 @@ public class Main {
         Gerenciador gerenciador = new Gerenciador(scanner);
         Banco banco = new Banco();
 
-
         boolean continuar = true;
 
         System.out.println("=== Sistema de Gerenciamento de Pessoas ===");
 
         while (continuar) {
-            System.out.println("\nEscolha uma opção:");
-            System.out.println("1 - Adicionar astronauta");
-            System.out.println("2 - Listar todas os astronautas");
-            System.out.println("3 - Adicionar Nave");
-            System.out.println("4 - Listar todas as naves");
-            System.out.println("0 - Sair");
+            System.out.println("\n============ MENU ============\n" +
+			                   "[1] - Cadastrar novo astronauta\n" +
+			                   "[2] - Listar astronautas\n" +
+			                   "------------------------------\n" +
+			                   "[3] - Cadastrar nova nava\n" +
+			                   "[4] - Listar todas as naves\n" +
+			                   "------------------------------\n" +
+			                   "[5] - Realizar locacao\n" +
+			                   "[6] - Devolucao de midia\n" +
+			                   "[7] - Listar historico de locacoes\n" +
+			                   "------------------------------\n" +
+			                   "[8] - Mostrar total arrecadado\n" +
+			                   "[0] - Sair\n" +
+			                   "==============================");
 
             System.out.print("Opção: ");
             String opcao = scanner.nextLine();
@@ -60,7 +67,5 @@ public class Main {
 
         scanner.close();
         banco.fecharBanco();
-    }}
-
-
-
+    }
+}
