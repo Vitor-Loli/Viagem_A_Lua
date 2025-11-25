@@ -2,9 +2,12 @@ package com.example;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import org.dizitart.no2.objects.Id;
 
 
 public class MissaoEspacial implements Serializable {
+    @Id
+    private int id;
     private List<Astronauta> tripulacao;
     private Nave nave;
     private String nome;
@@ -13,6 +16,8 @@ public class MissaoEspacial implements Serializable {
     private String objetivo;
     private String resultado;
     private boolean concluida = false;
+
+    public MissaoEspacial() {}
 
     public MissaoEspacial(Nave nave, String nome, String dataDeLancamento, String destino, String objetivo, String resultado) {
         this.tripulacao = new ArrayList<>();

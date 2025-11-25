@@ -50,22 +50,26 @@ public class Gerenciador {
             System.out.println("Informe o modelo da nave: ");
             String modelo = scanner.nextLine();
 
+            int id = 0;
+
+            for (Nave n : naveCargueira.find()) {
+                if (n.getId() > id) {
+                    id = n.getId();
+                }
+            }
+            for (Nave n : naveTripulada.find()) {
+                if (n.getId() > id) {
+                    id = n.getId();
+                }
+            }
+
+            id += 1;
+
             switch (opc){
                 case 1:
                     System.out.println("Informe a capacidade máxima de tripulantes: ");
                     int capacidadeTripulantes =scanner.nextInt();
                     scanner.nextLine();
-
-                    int id = 0;
-
-                    for (Nave n : naveTripulada.find()) {
-                        if (n.getId() > id) {
-                            id = n.getId();
-                        }
-                    }
-
-                    id += 1;
-
                     naveTripulada.insert(new NaveTripulada(id , modelo, capacidadeTripulantes));
                     flag = false;
                     break;
@@ -73,17 +77,6 @@ public class Gerenciador {
                     System.out.println("Informe a capacidade máxima de carga: ");
                     double capacidadeCarga =scanner.nextDouble();
                     scanner.nextLine();
-
-                     id = 0;
-
-                    for (Nave n : naveCargueira.find()) {
-                        if (n.getId() > id) {
-                            id = n.getId();
-                        }
-                    }
-
-                    id += 1;
-
                     naveCargueira.insert(new NaveCargueira(id , modelo, capacidadeCarga));
                     flag = false;
                     break;
@@ -102,7 +95,13 @@ public class Gerenciador {
     }
 
     public void cadMissaoEspacial() {
-        
+        System.out.println("Informe o nome da missão: ");
+        String nome =scanner.nextLine();
+        System.out.println("Informe a data de lançamento: ");
+        String dataLancamento =scanner.nextLine();
+        System.out.println("Informe o destino da nave: ");
+        String destino =scanner.nextLine();
+
     }
 
 }
