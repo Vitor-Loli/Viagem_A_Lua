@@ -8,7 +8,7 @@ import org.dizitart.no2.objects.Id;
 public class MissaoEspacial implements Serializable {
     @Id
     private int id;
-    private List<Astronauta> tripulacao;
+    private List<Astronauta> tripulacao = new ArrayList<>();
     private Nave nave;
     private String nome;
     private String dataDeLancamento;
@@ -19,8 +19,10 @@ public class MissaoEspacial implements Serializable {
 
     public MissaoEspacial() {}
 
-    public MissaoEspacial(Nave nave, String nome, String dataDeLancamento, String destino, String objetivo, String resultado) {
-        this.tripulacao = new ArrayList<>();
+    public MissaoEspacial(Nave nave, String nome, String dataDeLancamento, String destino, String objetivo, String resultado, List<Astronauta> tripulacao) {
+        adicionarAstronauta(tripulacao.get(0));
+        adicionarAstronauta(tripulacao.get(1));
+        adicionarAstronauta(tripulacao.get(2));
         this.nave = nave;
         this.nome = nome;
         this.dataDeLancamento = dataDeLancamento;
