@@ -63,8 +63,7 @@ public class Astronauta implements Serializable {
 
     @Override
     public String toString() {
-        return  "[" + id + "] " + nome + "\n" +
-                "Idade: " + idade + "\n" +
+        return  "[" + id + "] " + nome + " | Idade: " + idade + "\n" +
                 "Especialidade: " + especialidade + "\n" +
                 "Horas de voo: " + horasDeVoo + "\n" +
                 (this.disponivel ? "DISPONIVEL" : "INDISPONIVEL");

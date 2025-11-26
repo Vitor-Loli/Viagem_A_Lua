@@ -25,7 +25,7 @@ public class Main {
         System.out.println("=== Sistema de Gerenciamento de Pessoas ===");
 
         while (continuar) {
-            System.out.println("\n=============== MENU ===============\n" +
+            System.out.println("\n\n=============== MENU ===============\n" +
 			                   "[1] - Cadastrar novo astronauta\n" +
 			                   "[2] - Listar astronautas\n" +
                                "[3] - Excluir astronauta\n" +
@@ -33,7 +33,7 @@ public class Main {
 			                   "[4] - Cadastrar nova nave\n" +
 			                   "[5] - Listar todas as naves\n" +
                                "[6] - Excluir nave\n" +
-			                   "------------------------------\n" +
+			                   "------------------------------------\n" +
 			                   "[7] - Iniciar nova missão espacial\n" +
 			                   "[8] - Finalizar missão espacial\n" +
 			                   "[9] - Historico de missões espaciais\n" +

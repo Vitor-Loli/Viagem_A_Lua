@@ -40,6 +40,6 @@ public abstract class Nave implements Serializable {
 
     @Override
     public String toString() {
-        return "[" + id + "] " + this.getModelo() + "\n" + (this.disponivel ? "DISPONIVEL" : "INDISPONIVEL") + "\n";
+        return "[" + id + "] " + this.getModelo() + " | " + (this.disponivel ? "DISPONIVEL" : "INDISPONIVEL") + "\n";
     }
 }
