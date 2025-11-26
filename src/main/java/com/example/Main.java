@@ -9,21 +9,19 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
-/**
- * Classe principal que gerencia a persistência de pessoas no banco Nitritegit
- */
 public class Main {
     private static Nitrite db;
 
     public static void main(String[] args) {
+        // inicializando objetos
         Scanner scanner = new Scanner(System.in);
         Gerenciador gerenciador = new Gerenciador(scanner);
         Banco banco = new Banco();
 
+        // variavel para controlar o loop do menu
         boolean continuar = true;
 
-        System.out.println("=== Sistema de Gerenciamento de Pessoas ===");
-
+        // loop do menu
         while (continuar) {
             System.out.println("\n\n=============== MENU ===============\n" +
 			                   "[1] - Cadastrar novo astronauta\n" +
@@ -41,9 +39,11 @@ public class Main {
 			                   "[0] - Sair\n" +
 			                   "====================================\n");
 
+            // lendo a opcao do usuario
             System.out.print("Opção: ");
             String opcao = scanner.nextLine();
 
+            // executando a acao escolhida
             switch (opcao) {
                 case "1":
                     gerenciador.cadAstronauta();
@@ -81,6 +81,7 @@ public class Main {
             }
         }
 
+        // fechando recursos
         scanner.close();
         banco.fecharBanco();
     }
