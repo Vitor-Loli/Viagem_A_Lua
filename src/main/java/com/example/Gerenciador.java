@@ -48,10 +48,10 @@ public class Gerenciador {
     public int listarAstronautasDispiniveis(boolean imprime){
         int flag = 0;
         for (Astronauta a : astronauta.find()) {
-            if(a.getIdade()>=21 && imprime){
+            if(a.isDisponivel() && imprime){
                 System.out.println(a.toString());
-            } else if (a.getIdade()>=21) {
-                flag =+ 1;
+            } else if (a.isDisponivel()) {
+                flag += 1;
             }
         }
         return flag;
@@ -188,10 +188,20 @@ public class Gerenciador {
             if(i > 2){
                 break;
             }
+            if(i >= 1){
+                System.out.println("Deseja informar mais um astronauta? \n[1] - Sim\n[2] - Não");
+                int resposta = scanner.nextInt();
+                scanner.nextLine();
+                if(resposta == 2){
+                    break;
+                }
+            }
             System.out.println("Informe o " + (i+1) + "º astronauta: ");
             int astronautaid = scanner.nextInt();
             tripulacao.add(astronauta.find(ObjectFilters.eq("id", astronautaid)).firstOrDefault());
+            Astronauta a = astronauta.find(ObjectFilters.eq("id", astronautaid)).firstOrDefault();
             astronauta.find(ObjectFilters.eq("id", astronautaid)).firstOrDefault().setDisponivel(false);
+            astronauta.update(a);
             scanner.nextLine();
         }
 
