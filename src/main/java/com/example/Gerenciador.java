@@ -45,14 +45,14 @@ public class Gerenciador {
         }
     }
 
-    public int listarAstronautasDispiniveis(boolean imprime){
-        int flag = 0;
+    public boolean listarAstronautasDispiniveis(){
+        boolean flag = false;
         for (Astronauta a : astronauta.find()) {
-            if(a.isDisponivel() && imprime){
+            if(a.isDisponivel()){
                 System.out.println(a.toString());
-            } else if (a.isDisponivel()) {
-                flag += 1;
+                flag = true;
             }
+
         }
         return flag;
     }
@@ -141,7 +141,7 @@ public class Gerenciador {
             return;
         }
 
-        if(listarAstronautasDispiniveis(false) == 0){
+        if(!listarAstronautasDispiniveis()){
             System.out.println("Nenhum astrunauta disponível para a missão!");
             return;
         }
@@ -184,7 +184,10 @@ public class Gerenciador {
         int nave = scanner.nextInt();
         scanner.nextLine();
         List<Astronauta> tripulacao = new ArrayList<>();
-        for(int i = 0; i<listarAstronautasDispiniveis(true); i++){
+        for(int i = 0; i<3; i++){
+            if (i == 0){
+                listarAstronautasDispiniveis();
+            }
             if(i > 2){
                 break;
             }
@@ -194,13 +197,15 @@ public class Gerenciador {
                 scanner.nextLine();
                 if(resposta == 2){
                     break;
+                }else{
+                    listarAstronautasDispiniveis();
                 }
             }
             System.out.println("Informe o " + (i+1) + "º astronauta: ");
             int astronautaid = scanner.nextInt();
-            tripulacao.add(astronauta.find(ObjectFilters.eq("id", astronautaid)).firstOrDefault());
             Astronauta a = astronauta.find(ObjectFilters.eq("id", astronautaid)).firstOrDefault();
-            astronauta.find(ObjectFilters.eq("id", astronautaid)).firstOrDefault().setDisponivel(false);
+            tripulacao.add(a);
+            a.setDisponivel(false);
             astronauta.update(a);
             scanner.nextLine();
         }
