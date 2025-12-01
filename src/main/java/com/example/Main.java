@@ -49,6 +49,9 @@ public class Main {
                 case "4":
                     gerenciador.listarNaves();
                     break;
+                case "5":
+                    gerenciador.cadMissaoEspacial();
+                    break;
                 case "0":
                     continuar = false;
                     System.out.println("Encerrando...");
