@@ -20,9 +20,7 @@ public class MissaoEspacial implements Serializable {
     public MissaoEspacial() {}
 
     public MissaoEspacial(Nave nave, String nome, String dataDeLancamento, String destino, String objetivo, String resultado, List<Astronauta> tripulacao) {
-        adicionarAstronauta(tripulacao.get(0));
-        adicionarAstronauta(tripulacao.get(1));
-        adicionarAstronauta(tripulacao.get(2));
+        this.tripulacao = tripulacao;
         this.nave = nave;
         this.nome = nome;
         this.dataDeLancamento = dataDeLancamento;

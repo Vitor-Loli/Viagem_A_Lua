@@ -45,12 +45,12 @@ public class Gerenciador {
         }
     }
 
-    public boolean listarAstronautasDispiniveis(){
-        boolean flag = false;
+    public int listarAstronautasDispiniveis(){
+        int flag = 0;
         for (Astronauta a : astronauta.find()) {
             if(a.getIdade()>=21){
                 System.out.println(a.toString());
-                flag = true;
+                flag =+ 1;
             }
         }
         return flag;
@@ -140,7 +140,7 @@ public class Gerenciador {
             return;
         }
 
-        if(!listarAstronautasDispiniveis()){
+        if(listarAstronautasDispiniveis() == 0){
             System.out.println("Nenhum astrunauta disponível para a missão!");
             return;
         }
@@ -182,9 +182,8 @@ public class Gerenciador {
         System.out.println("Informe a nave utilizada para a missão: ");
         int nave = scanner.nextInt();
         scanner.nextLine();
-        listarAstronautasDispiniveis();
-         List<Astronauta> tripulacao = new ArrayList<>();
-        for(int i = 0; i<astronauta.find().size(); i++){
+        List<Astronauta> tripulacao = new ArrayList<>();
+        for(int i = 0; i<listarAstronautasDispiniveis(); i++){
             if(i > 2){
                 break;
             }
