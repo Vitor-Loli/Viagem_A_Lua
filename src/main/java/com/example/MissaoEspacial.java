@@ -84,4 +84,13 @@ public class MissaoEspacial implements Serializable {
     public void removerAstronauta(Astronauta a) {
         this.tripulacao.remove(a);
     }
+    public String toString() {
+        return  "[" + id + "] " + nome + "\n" +
+                "Tripulação: " + tripulacao + "\n" +
+                "Nave: " + nave + "\n" +
+                "Data de lançamento: " + dataDeLancamento + "\n" +
+                "Destino: " + destino + "\n" +
+                "Objetivo: " + objetivo + "\n" +
+                "Resultado: " + resultado + "\n";
+    }
 }

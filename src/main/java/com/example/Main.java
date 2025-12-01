@@ -52,6 +52,9 @@ public class Main {
                 case "5":
                     gerenciador.cadMissaoEspacial();
                     break;
+                case "6":
+                    gerenciador.listarMissoes();
+                    break;
                 case "0":
                     continuar = false;
                     System.out.println("Encerrando...");

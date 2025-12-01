@@ -219,4 +219,10 @@ public class Gerenciador {
 
     }
 
+    public void listarMissoes(){
+        for(MissaoEspacial m : missao.find()){
+            System.out.println(m.toString());
+        }
+    }
+
 }
