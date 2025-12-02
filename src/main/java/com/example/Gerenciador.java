@@ -8,17 +8,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Gerenciador {
+    // ========== ATRIBUTOS ==========
     private Scanner scanner;
     ObjectRepository<Astronauta> astronauta = Banco.repositorio(Astronauta.class);
     ObjectRepository<NaveTripulada> naveTripulada = Banco.repositorio(NaveTripulada.class);
     ObjectRepository<NaveCargueira> naveCargueira = Banco.repositorio(NaveCargueira.class);
     ObjectRepository<MissaoEspacial> missao = Banco.repositorio(MissaoEspacial.class);
 
-
+    // ========== CONSTRUTOR ==========
     public Gerenciador(Scanner scanner) {
         this.scanner = scanner;
     }
 
+    // ========== OPERAÇÕES COM ASTRONAUTAS ==========
     public void cadAstronauta() {
         System.out.println("Informe o nome do Astronauta: ");
         String nome =scanner.nextLine();
@@ -60,6 +62,7 @@ public class Gerenciador {
         return flag;
     }
 
+    // ========== OPERAÇÕES COM NAVES ==========
     public void cadNave() {
         boolean flag = true;
         do{
@@ -143,6 +146,7 @@ public class Gerenciador {
         return flag;
     }
 
+    // ========== OPERAÇÕES COM MISSÕES ESPACIAIS ==========
     public void cadMissaoEspacial() {
         if(astronauta.find().size() == 0){
             System.out.println("Nenhum Astronauta cadastrado!");
@@ -232,9 +236,12 @@ public class Gerenciador {
     }
 
     public void listarMissoes(){
-        for(MissaoEspacial m : missao.find()){
-            System.out.println(m.toString());
+        System.out.println("============= MISSÕES ESPACIAIS =============\n\n");
+        for (MissaoEspacial m : missao.find()) {
+            System.out.println("---------------------------------------\n" + m.toString());
         }
+        System.out.println("---------------------------------------\n\n");
+        System.out.println("=======================================");
     }
 
 }

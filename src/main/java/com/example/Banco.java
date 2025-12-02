@@ -4,13 +4,15 @@ import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
 
 public class Banco {
-
+    // ========== ATRIBUTOS ==========
     private static Nitrite db;
 
+    // ========== CONSTRUTOR ==========
     public Banco(){
         Banco.conectar();
     }
 
+    // ========== MÉTODOS DE BANCO DE DADOS ==========
     public static Nitrite conectar() {
         if (db == null) {
             db = Nitrite.builder()

@@ -4,13 +4,14 @@ import java.io.Serializable;
 import org.dizitart.no2.objects.Id;
 
 public abstract class Nave implements Serializable {
-
+    // ========== ATRIBUTOS ==========
     private static final long serialVersionUID = 1L;
     @Id
     private int id;
     private String modelo;
     private boolean disponivel = true;
 
+    // ========== CONSTRUTORES ==========
     public Nave(){
     }
     public Nave(int id, String modelo) {
@@ -19,6 +20,7 @@ public abstract class Nave implements Serializable {
         this.disponivel = true;
     }
 
+    // ========== GETTERS E SETTERS ==========
     public int getId() {
         return id;
     }
@@ -38,6 +40,7 @@ public abstract class Nave implements Serializable {
         this.disponivel = disponivel;
     }
 
+    // ========== TO STRING ==========
     @Override
     public String toString() {
         return "[" + id + "] " + this.getModelo() + " | " + (this.disponivel ? "DISPONIVEL" : "INDISPONIVEL") + "\n";

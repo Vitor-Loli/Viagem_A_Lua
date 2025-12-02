@@ -4,13 +4,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // inicializando objetos
+        // ========== INICIALIZAÇÃO ==========
         Scanner scanner = new Scanner(System.in);
         Gerenciador gerenciador = new Gerenciador(scanner);
-        // variavel para controlar o loop do menu
         boolean continuar = true;
 
-        // loop do menu
+        // ========== LOOP PRINCIPAL DO MENU ==========
         while (continuar) {
             System.out.println("\n\n=============== MENU ===============\n" +
 			                   "[1] - Cadastrar novo astronauta\n" +
@@ -70,7 +69,7 @@ public class Main {
             }
         }
 
-        // fechando recursos
+        // ========== FECHAMENTO DE RECURSOS ==========
         scanner.close();
         Banco.fecharBanco();
     }
