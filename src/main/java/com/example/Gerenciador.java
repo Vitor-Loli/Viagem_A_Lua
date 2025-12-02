@@ -158,6 +158,16 @@ public class Gerenciador {
             return;
         }
 
+        int id = 0;
+
+        for (MissaoEspacial missaoespacial : missao.find()) {
+            if (missaoespacial.getId() > id) {
+                id = missaoespacial.getId();
+            }
+        }
+
+        id += 1;
+
         System.out.println("Informe o nome da missão: ");
         String nome =scanner.nextLine();
         System.out.println("Informe a data de lançamento: ");
@@ -223,9 +233,9 @@ public class Gerenciador {
         }
 
         if(opc == 1){
-            missao.insert(new MissaoEspacial(naveTripulada.find(ObjectFilters.eq("id", nave)).firstOrDefault(), nome, dataLancamento, destino , objetivo ,"", tripulacao));
+            missao.insert(new MissaoEspacial(id, naveTripulada.find(ObjectFilters.eq("id", nave)).firstOrDefault(), nome, dataLancamento, destino , objetivo ,"", tripulacao));
         }else{
-            missao.insert(new MissaoEspacial(naveCargueira.find(ObjectFilters.eq("id", nave)).firstOrDefault(), nome, dataLancamento, destino , objetivo ,"", tripulacao));
+            missao.insert(new MissaoEspacial(id, naveCargueira.find(ObjectFilters.eq("id", nave)).firstOrDefault(), nome, dataLancamento, destino , objetivo ,"", tripulacao));
         }
 
 
