@@ -21,9 +21,10 @@ public class MissaoEspacial implements Serializable {
 
     public MissaoEspacial() {}
 
-    public MissaoEspacial(Nave nave, String nome, String dataDeLancamento, String destino, String objetivo, String resultado, List<Astronauta> tripulacao) {
+    public MissaoEspacial(int id, Nave nave, String nome, String dataDeLancamento, String destino, String objetivo, String resultado, List<Astronauta> tripulacao) {
+        this.id = id;
         this.tripulacao = tripulacao;
-        this.naveId = nave.getId();
+        this.naveId = nave instanceof NaveTripulada ? ((NaveTripulada) nave).getId() : ((NaveCargueira) nave).getId();
         this.nomeNave = nave.getModelo();
         this.tipoNave = nave instanceof NaveTripulada ? "Tripulada" : "Cargueira";
         this.nome = nome;
@@ -33,6 +34,12 @@ public class MissaoEspacial implements Serializable {
         this.resultado = resultado;
     }
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public List<Astronauta> getTripulacao() {
         return tripulacao;
     }
@@ -117,6 +124,17 @@ public class MissaoEspacial implements Serializable {
         for (Astronauta a : tripulacao) {
             sb.append("  - ").append(a.getNome()).append(" (ID: ").append(a.getId()).append(", Especialidade: ").append(a.getEspecialidade()).append(")\n");
         }
+        sb.append("========================\n");
+        return sb.toString();
+    }
+
+    public String toStringResultado(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== MISSÃO ESPACIAL ===\n");
+        sb.append("ID: ").append(id).append("\n");
+        sb.append("Nome: ").append(nome).append("\n");
+        sb.append("Objetivo: ").append(objetivo).append("\n");
+        sb.append("Resultado: ").append(resultado.isEmpty() ? "Pendente" : resultado).append("\n");
         sb.append("========================\n");
         return sb.toString();
     }

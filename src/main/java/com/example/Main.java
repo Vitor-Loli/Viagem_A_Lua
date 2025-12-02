@@ -56,10 +56,13 @@ public class Main {
                     gerenciador.cadMissaoEspacial();
                     break;
                 case "8":
-                    //gerenciador.finalizarMissao();
+                    gerenciador.finalizarMissao();
                     break; 
                 case "9":
                     gerenciador.listarMissoes();
+                    break;
+                case "10":
+                    gerenciador.listarResultados();
                     break;
                 case "0":
                     continuar = false;
