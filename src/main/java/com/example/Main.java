@@ -63,7 +63,8 @@ public class Main {
 
         scanner.close();
         Banco.fecharBanco();
-    }}
+    }
+}
 
 
 
