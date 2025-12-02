@@ -4,6 +4,7 @@ import java.io.Serializable;
 import org.dizitart.no2.objects.Id;
 
 public class Astronauta implements Serializable {
+    // atributos
     @Id
     private int id;
     private String nome;
@@ -13,6 +14,7 @@ public class Astronauta implements Serializable {
     private boolean disponivel;
 
 
+    // construtores
     public Astronauta() {
     }
     public Astronauta(int id, String nome, int idade, String especialidade) {
@@ -28,6 +30,7 @@ public class Astronauta implements Serializable {
         }
     }
 
+    // setters e getters
     public int getId() {
         return id;
     }
@@ -65,10 +68,10 @@ public class Astronauta implements Serializable {
         this.disponivel = disponivel;
     }
 
+    // toString
     @Override
     public String toString() {
-        return  "[" + id + "] " + nome + "\n" +
-                "Idade: " + idade + "\n" +
+        return  "[" + id + "] " + nome + " | Idade: " + idade + "\n" +
                 "Especialidade: " + especialidade + "\n" +
                 "Horas de voo: " + horasDeVoo + "\n" +
                 (this.disponivel ? "DISPONIVEL" : "INDISPONIVEL");

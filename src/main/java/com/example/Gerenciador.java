@@ -40,9 +40,12 @@ public class Gerenciador {
         astronauta.insert(new Astronauta(id, nome,idade,especialidade));
     }
     public void listarAstronautas() {
+        System.out.println("============= ASTRONAUTAS =============\n\n");
         for (Astronauta a : astronauta.find()) {
-            System.out.println(a.toString());
+            System.out.println("---------------------------------------\n" + a.toString());
         }
+        System.out.println("---------------------------------------\n\n");
+        System.out.println("=======================================");
     }
 
     public boolean listarAstronautasDispiniveis(){
@@ -90,7 +93,7 @@ public class Gerenciador {
                     flag = false;
                     break;
                 case 2:
-                    System.out.println("Informe a capacidade máxima de carga: ");
+                    System.out.println("Informe a capacidade máxima de carga (em KG): ");
                     double capacidadeCarga =scanner.nextDouble();
                     scanner.nextLine();
                     naveCargueira.insert(new NaveCargueira(id , modelo, capacidadeCarga));
@@ -102,12 +105,21 @@ public class Gerenciador {
         }while(flag);
     }
     public void listarNaves(){
+        System.out.println("=============== NAVES ===============\n\n");
+
+
+        System.out.println("------------ [Tripulada] ------------");
         for (Nave n : naveTripulada.find()) {
             System.out.println(n.toString());
+            System.out.println("-------------------------------------");
         }
+
+        System.out.println("\n\n\n------------ [Cargueira] ------------");
         for (Nave n : naveCargueira.find()) {
             System.out.println(n.toString());
+            System.out.println("-------------------------------------");
         }
+        System.out.println("\n\n=====================================");
     }
 
     public boolean listarNavesTripuladasDisponiveis(){
