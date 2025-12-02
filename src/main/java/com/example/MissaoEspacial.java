@@ -120,4 +120,17 @@ public class MissaoEspacial implements Serializable {
         sb.append("========================\n");
         return sb.toString();
     }
+
+    public String toStringResultado(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== MISSÃO ESPACIAL ===\n");
+        sb.append("ID: ").append(id).append("\n");
+        sb.append("Nome: ").append(nome).append("\n");
+        sb.append("Destino: ").append(destino).append("\n");
+        sb.append("Objetivo: ").append(objetivo).append("\n");
+        sb.append("Status: ").append(concluida ? "CONCLUÍDA" : "EM ANDAMENTO").append("\n");
+        sb.append("Resultado: ").append(resultado.isEmpty() ? "Pendente" : resultado).append("\n");
+        sb.append("========================\n");
+        return sb.toString();
+    }
 }

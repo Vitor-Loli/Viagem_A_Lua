@@ -231,10 +231,71 @@ public class Gerenciador {
 
     }
 
-    public void listarMissoes(){
+    public boolean listarMissoes(){
+        boolean flag = false;
         for(MissaoEspacial m : missao.find()){
             System.out.println(m.toString());
+            flag = true;
         }
+        return flag;
+    }
+
+    public boolean listarMissoesEmAberto(){
+        boolean flag = false;
+        for(MissaoEspacial m : missao.find()){
+            if(!m.isConcluida()) {
+                System.out.println(m.toString());
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    public boolean listarResultados(){
+        boolean flag = false;
+        for(MissaoEspacial m : missao.find()){
+            if(m.isConcluida()) {
+                System.out.println(m.toStringResultado());
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    public void finalizarMissao(){
+        if(!listarMissoesEmAberto()){
+            System.out.println("Não há missões em aberto!");
+            return;
+        }
+        System.out.println("Informe qual missão deseja finalizar: ");
+        int missaoId = scanner.nextInt();
+        scanner.nextLine();
+        MissaoEspacial m = missao.find(ObjectFilters.eq("id", missaoId)).firstOrDefault();
+        System.out.println("Descreva o resultado da missão:");
+        String resultado = scanner.nextLine();
+        m.setConcluida(true);
+        m.setResultado(resultado);
+        missao.update(m);
+
+        int naveId = m.getNaveId();
+        String naveType = m.getTipoNave();
+        if(naveType.equals("Tripulada")){
+            Nave n = naveTripulada.find(ObjectFilters.eq("id", naveId)).firstOrDefault();
+            n.setDisponivel(true);
+            naveTripulada.update((NaveTripulada) n);
+        }else {
+            Nave n = naveCargueira.find(ObjectFilters.eq("id", naveId)).firstOrDefault();
+            n.setDisponivel(true);
+            naveCargueira.update((NaveCargueira) n);
+        }
+
+        for(int i = 0; i<m.getTripulacao().size(); i++){
+            int astronautaId = m.getTripulacao().get(i).getId();
+            Astronauta a = astronauta.find(ObjectFilters.eq("id", astronautaId)).firstOrDefault();
+            a.setDisponivel(true);
+            astronauta.update(a);
+        }
+
     }
 
 }
