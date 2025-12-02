@@ -73,12 +73,12 @@ public class Gerenciador {
 
             int id = 0;
 
-            for (Nave n : naveCargueira.find()) {
+            for (NaveCargueira n : naveCargueira.find()) {
                 if (n.getId() > id) {
                     id = n.getId();
                 }
             }
-            for (Nave n : naveTripulada.find()) {
+            for (NaveTripulada n : naveTripulada.find()) {
                 if (n.getId() > id) {
                     id = n.getId();
                 }
@@ -101,8 +101,8 @@ public class Gerenciador {
                     naveCargueira.insert(new NaveCargueira(id , modelo, capacidadeCarga));
                     flag = false;
                     break;
-                    default:
-                        System.out.println("Opção invalida");
+                default:
+                    System.out.println("Opção invalida");
             }
         }while(flag);
     }
@@ -111,13 +111,13 @@ public class Gerenciador {
 
 
         System.out.println("------------ [Tripulada] ------------");
-        for (Nave n : naveTripulada.find()) {
+        for (NaveTripulada n : naveTripulada.find()) {
             System.out.println(n.toString());
             System.out.println("-------------------------------------");
         }
 
         System.out.println("\n\n\n------------ [Cargueira] ------------");
-        for (Nave n : naveCargueira.find()) {
+        for (NaveCargueira n : naveCargueira.find()) {
             System.out.println(n.toString());
             System.out.println("-------------------------------------");
         }
@@ -126,7 +126,7 @@ public class Gerenciador {
 
     public boolean listarNavesTripuladasDisponiveis(){
         boolean flag = false;
-        for (Nave n : naveTripulada.find()) {
+        for (NaveTripulada n : naveTripulada.find()) {
             if(n.isDisponivel()){
                 System.out.println(n.toString());
                 flag = true;
@@ -136,7 +136,7 @@ public class Gerenciador {
     }
     public boolean listarNavescargueirasDisponiveis(){
         boolean flag = false;
-        for (Nave n : naveCargueira.find()) {
+        for (NaveCargueira n : naveCargueira.find()) {
             if(n.isDisponivel()){
                 System.out.println(n.toString());
                 flag = true;

@@ -19,12 +19,7 @@ public abstract class Nave implements Serializable {
         this.disponivel = true;
     }
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+
     public String getModelo() {
         return modelo;
     }
@@ -40,6 +35,6 @@ public abstract class Nave implements Serializable {
 
     @Override
     public String toString() {
-        return "[" + id + "] " + this.getModelo() + " | " + (this.disponivel ? "DISPONIVEL" : "INDISPONIVEL") + "\n";
+        return this.getModelo() + " | " + (this.disponivel ? "DISPONIVEL" : "INDISPONIVEL") + "\n";
     }
 }

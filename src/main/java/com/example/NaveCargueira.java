@@ -1,5 +1,7 @@
 package com.example;
 
+import org.dizitart.no2.objects.Id;
+
 public class NaveCargueira extends Nave {
     @Id
     private int id;
@@ -28,6 +30,6 @@ public class NaveCargueira extends Nave {
 
     @Override
     public String toString(){
-        return super.toString() + " Capacidade de carga " + this.capacidadeCarga + "KG";
+        return "[" + id + "] " + super.toString() + " Capacidade de carga " + this.capacidadeCarga + "KG";
     }
 }

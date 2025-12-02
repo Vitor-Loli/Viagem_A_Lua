@@ -24,7 +24,7 @@ public class MissaoEspacial implements Serializable {
     public MissaoEspacial(int id, Nave nave, String nome, String dataDeLancamento, String destino, String objetivo, String resultado, List<Astronauta> tripulacao) {
         this.id = id;
         this.tripulacao = tripulacao;
-        this.naveId = nave.getId();
+        this.naveId = nave instanceof NaveTripulada ? ((NaveTripulada) nave).getId() : ((NaveCargueira) nave).getId();
         this.nomeNave = nave.getModelo();
         this.tipoNave = nave instanceof NaveTripulada ? "Tripulada" : "Cargueira";
         this.nome = nome;
