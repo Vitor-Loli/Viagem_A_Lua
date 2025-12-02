@@ -1,23 +1,12 @@
 package com.example;
 
-import org.dizitart.no2.Nitrite;
-import org.dizitart.no2.NitriteCollection;
-import org.dizitart.no2.objects.ObjectRepository;
-import org.dizitart.no2.objects.filters.ObjectFilters;
-
-import java.util.List;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class Main {
-    private static Nitrite db;
-
     public static void main(String[] args) {
         // inicializando objetos
         Scanner scanner = new Scanner(System.in);
         Gerenciador gerenciador = new Gerenciador(scanner);
-        Banco banco = new Banco();
-
         // variavel para controlar o loop do menu
         boolean continuar = true;
 
@@ -83,6 +72,6 @@ public class Main {
 
         // fechando recursos
         scanner.close();
-        banco.fecharBanco();
+        Banco.fecharBanco();
     }
 }
