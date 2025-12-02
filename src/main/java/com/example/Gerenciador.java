@@ -48,10 +48,10 @@ public class Gerenciador {
         System.out.println("=======================================");
     }
 
-    public boolean listarAstronautasDispiniveis(){
+    public boolean listarAstronautasDispiniveis(boolean imprimir){
         boolean flag = false;
         for (Astronauta a : astronauta.find()) {
-            if(a.isDisponivel()){
+            if(a.isDisponivel() && imprimir){
                 System.out.println(a.toString());
                 flag = true;
             }
@@ -153,7 +153,7 @@ public class Gerenciador {
             return;
         }
 
-        if(!listarAstronautasDispiniveis()){
+        if(!listarAstronautasDispiniveis(false)){
             System.out.println("Nenhum astronauta disponível para a missão!");
             return;
         }
@@ -208,7 +208,7 @@ public class Gerenciador {
         List<Astronauta> tripulacao = new ArrayList<>();
         for(int i = 0; i<3; i++){
             if (i == 0){
-                listarAstronautasDispiniveis();
+                listarAstronautasDispiniveis(true);
             }
             if(i > 2){
                 break;
@@ -220,7 +220,7 @@ public class Gerenciador {
                 if(resposta == 2){
                     break;
                 }else{
-                    listarAstronautasDispiniveis();
+                    listarAstronautasDispiniveis(true);
                 }
             }
             System.out.println("Informe o " + (i+1) + "º astronauta: ");
@@ -230,6 +230,17 @@ public class Gerenciador {
             a.setDisponivel(false);
             astronauta.update(a);
             scanner.nextLine();
+
+            if(opc == 1){
+                Nave n = naveTripulada.find(ObjectFilters.eq("id", nave)).firstOrDefault();
+                n.setDisponivel(false);
+                naveTripulada.update((NaveTripulada) n);
+            }else{
+                Nave n = naveCargueira.find(ObjectFilters.eq("id", nave)).firstOrDefault();
+                n.setDisponivel(false);
+                naveTripulada.update((NaveTripulada) n);
+            }
+
         }
 
         if(opc == 1){
@@ -299,11 +310,15 @@ public class Gerenciador {
             naveCargueira.update((NaveCargueira) n);
         }
 
-        for(int i = 0; i<m.getTripulacao().size(); i++){
-            int astronautaId = m.getTripulacao().get(i).getId();
-            Astronauta a = astronauta.find(ObjectFilters.eq("id", astronautaId)).firstOrDefault();
-            a.setDisponivel(true);
-            astronauta.update(a);
+        for (Astronauta astro : m.getTripulacao()) {
+            Astronauta a = astronauta.find(ObjectFilters.eq("id", astro.getId())).firstOrDefault();
+
+            if (a != null) {
+                a.setDisponivel(true);
+                astronauta.update(a);
+            } else {
+                System.out.println("Astronauta ID " + astro.getId() + " não encontrado no banco.");
+            }
         }
 
     }
