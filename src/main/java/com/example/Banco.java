@@ -8,7 +8,7 @@ public class Banco {
     private static Nitrite db;
 
     public Banco(){
-        this.conectar();
+        Banco.conectar();
     }
 
     public static Nitrite conectar() {
