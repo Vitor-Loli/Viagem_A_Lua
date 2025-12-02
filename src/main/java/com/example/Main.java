@@ -23,7 +23,7 @@ public class Main {
 			                   "------------------------------------\n" +
 			                   "[7] - Iniciar nova missão espacial\n" +
 			                   "[8] - Finalizar missão espacial\n" +
-			                   "[9] - Historico de missões espaciais\n" +
+			                   "[9] - Listar missões espaciais\n" +
 			                   "------------------------------------\n" +
 			                   "[0] - Sair\n" +
 			                   "====================================\n");
@@ -53,13 +53,13 @@ public class Main {
                     //gerenciador.excluirNave();
                     break;
                 case "7":
-                    //gerenciador.iniciarMissao();
+                    gerenciador.cadMissaoEspacial();
                     break;
                 case "8":
                     //gerenciador.finalizarMissao();
                     break; 
                 case "9":
-                    //gerenciador.historicoMissoes();
+                    gerenciador.listarMissoes();
                     break;
                 case "0":
                     continuar = false;

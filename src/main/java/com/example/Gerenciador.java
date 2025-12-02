@@ -154,7 +154,7 @@ public class Gerenciador {
         }
 
         if(!listarAstronautasDispiniveis()){
-            System.out.println("Nenhum astrunauta disponível para a missão!");
+            System.out.println("Nenhum astronauta disponível para a missão!");
             return;
         }
 
