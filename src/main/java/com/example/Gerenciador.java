@@ -226,34 +226,29 @@ public class Gerenciador {
             System.out.println("Informe o " + (i + 1) + "º astronauta: ");
             int astronautaId = scanner.nextInt();
             scanner.nextLine();
-
             Astronauta a = astronauta.find(ObjectFilters.eq("id", astronautaId)).firstOrDefault();
-
             if (a == null) {
                 System.out.println("Astronauta não encontrado, tente novamente.");
                 i--;
                 continue;
             }
-
             tripulacao.add(a);
             a.setDisponivel(false);
             astronauta.update(a);
         }
 
-        if(opc == 1){
-            Nave n = naveTripulada.find(ObjectFilters.eq("id", nave)).firstOrDefault();
-            n.setDisponivel(false);
-            naveTripulada.update((NaveTripulada) n);
-        }else{
-            Nave n = naveCargueira.find(ObjectFilters.eq("id", nave)).firstOrDefault();
-            n.setDisponivel(false);
-            naveTripulada.update((NaveTripulada) n);
-        }
+
 
         if(opc == 1){
-            missao.insert(new MissaoEspacial(id, naveTripulada.find(ObjectFilters.eq("id", nave)).firstOrDefault(), nome, dataLancamento, destino , objetivo ,"", tripulacao));
+            NaveTripulada n = naveTripulada.find(ObjectFilters.eq("id", nave)).firstOrDefault();
+            n.setDisponivel(false);
+            naveTripulada.update(n);
+            missao.insert(new MissaoEspacial(id, n, nome, dataLancamento, destino , objetivo ,"", tripulacao));
         }else{
-            missao.insert(new MissaoEspacial(id, naveCargueira.find(ObjectFilters.eq("id", nave)).firstOrDefault(), nome, dataLancamento, destino , objetivo ,"", tripulacao));
+            NaveCargueira n = naveCargueira.find(ObjectFilters.eq("id", nave)).firstOrDefault();
+            n.setDisponivel(false);
+            naveCargueira.update(n);
+            missao.insert(new MissaoEspacial(id, n, nome, dataLancamento, destino , objetivo ,"", tripulacao));
         }
 
 
