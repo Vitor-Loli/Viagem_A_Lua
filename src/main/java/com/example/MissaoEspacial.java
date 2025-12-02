@@ -2,11 +2,16 @@ package com.example;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import org.dizitart.no2.objects.Id;
 
 
 public class MissaoEspacial implements Serializable {
-    private List<Astronauta> tripulacao;
-    private Nave nave;
+    @Id
+    private int id;
+    private List<Astronauta> tripulacao = new ArrayList<>();
+    private int naveId;
+    private String tipoNave; // "Tripulada" ou "Cargueira"
+    private String nomeNave; // nome do modelo da nave
     private String nome;
     private String dataDeLancamento;
     private String destino;
@@ -14,9 +19,13 @@ public class MissaoEspacial implements Serializable {
     private String resultado;
     private boolean concluida = false;
 
-    public MissaoEspacial(Nave nave, String nome, String dataDeLancamento, String destino, String objetivo, String resultado) {
-        this.tripulacao = new ArrayList<>();
-        this.nave = nave;
+    public MissaoEspacial() {}
+
+    public MissaoEspacial(Nave nave, String nome, String dataDeLancamento, String destino, String objetivo, String resultado, List<Astronauta> tripulacao) {
+        this.tripulacao = tripulacao;
+        this.naveId = nave.getId();
+        this.nomeNave = nave.getModelo();
+        this.tipoNave = nave instanceof NaveTripulada ? "Tripulada" : "Cargueira";
         this.nome = nome;
         this.dataDeLancamento = dataDeLancamento;
         this.destino = destino;
@@ -30,11 +39,23 @@ public class MissaoEspacial implements Serializable {
     public void setTripulacao(List<Astronauta> tripulacao) {
         this.tripulacao = tripulacao;
     }
-    public Nave getNave() {
-        return nave;
+    public int getNaveId() {
+        return naveId;
     }
-    public void setNave(Nave nave) {
-        this.nave = nave;
+    public void setNaveId(int naveId) {
+        this.naveId = naveId;
+    }
+    public String getTipoNave() {
+        return tipoNave;
+    }
+    public void setTipoNave(String tipoNave) {
+        this.tipoNave = tipoNave;
+    }
+    public String getNomeNave() {
+        return nomeNave;
+    }
+    public void setNomeNave(String nomeNave) {
+        this.nomeNave = nomeNave;
     }
     public String getNome() {
         return nome;
@@ -78,5 +99,25 @@ public class MissaoEspacial implements Serializable {
     }
     public void removerAstronauta(Astronauta a) {
         this.tripulacao.remove(a);
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== MISSÃO ESPACIAL ===\n");
+        sb.append("ID: ").append(id).append("\n");
+        sb.append("Nome: ").append(nome).append("\n");
+        sb.append("Data de Lançamento: ").append(dataDeLancamento).append("\n");
+        sb.append("Destino: ").append(destino).append("\n");
+        sb.append("Objetivo: ").append(objetivo).append("\n");
+        sb.append("Nave: ").append(nomeNave).append(" (").append(tipoNave).append(")\n");
+        sb.append("Status: ").append(concluida ? "CONCLUÍDA" : "EM ANDAMENTO").append("\n");
+        sb.append("Resultado: ").append(resultado.isEmpty() ? "Pendente" : resultado).append("\n");
+        sb.append("Tripulação (").append(tripulacao.size()).append(" astronautas):\n");
+        for (Astronauta a : tripulacao) {
+            sb.append("  - ").append(a.getNome()).append(" (ID: ").append(a.getId()).append(", Especialidade: ").append(a.getEspecialidade()).append(")\n");
+        }
+        sb.append("========================\n");
+        return sb.toString();
     }
 }

@@ -23,7 +23,11 @@ public class Astronauta implements Serializable {
         this.idade = idade;
         this.especialidade = especialidade;
         this.horasDeVoo = "Nenhum";
-        this.disponivel = true;
+        if(idade >= 21){
+            this.disponivel = true;
+        }else{
+            this.disponivel = false;
+        }
     }
 
     // setters e getters
