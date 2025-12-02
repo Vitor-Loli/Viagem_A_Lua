@@ -51,8 +51,10 @@ public class Gerenciador {
     public boolean listarAstronautasDispiniveis(boolean imprimir){
         boolean flag = false;
         for (Astronauta a : astronauta.find()) {
-            if(a.isDisponivel() && imprimir){
-                System.out.println(a.toString());
+            if(a.isDisponivel() ){
+                if(imprimir){
+                    System.out.println(a.toString());
+                }
                 flag = true;
             }
 
