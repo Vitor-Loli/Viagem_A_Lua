@@ -18,9 +18,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Gerenciador gerenciador = new Gerenciador(scanner);
-        Banco banco = new Banco();
-
-
         boolean continuar = true;
 
         System.out.println("=== Sistema de Gerenciamento de Pessoas ===");
@@ -65,7 +62,7 @@ public class Main {
         }
 
         scanner.close();
-        banco.fecharBanco();
+        Banco.fecharBanco();
     }}
 
 
