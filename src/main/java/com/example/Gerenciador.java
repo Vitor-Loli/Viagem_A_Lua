@@ -208,41 +208,46 @@ public class Gerenciador {
         int nave = scanner.nextInt();
         scanner.nextLine();
         List<Astronauta> tripulacao = new ArrayList<>();
-        for(int i = 0; i<3; i++){
-            if (i == 0){
-                listarAstronautasDispiniveis(true);
-            }
-            if(i > 2){
-                break;
-            }
-            if(i >= 1){
+
+        for (int i = 0; i < 3; i++) {
+
+            listarAstronautasDispiniveis(true);
+
+            if (i >= 1) {
                 System.out.println("Deseja informar mais um astronauta? \n[1] - Sim\n[2] - Não");
                 int resposta = scanner.nextInt();
                 scanner.nextLine();
-                if(resposta == 2){
+
+                if (resposta == 2) {
                     break;
-                }else{
-                    listarAstronautasDispiniveis(true);
                 }
             }
-            System.out.println("Informe o " + (i+1) + "º astronauta: ");
-            int astronautaid = scanner.nextInt();
-            Astronauta a = astronauta.find(ObjectFilters.eq("id", astronautaid)).firstOrDefault();
+
+            System.out.println("Informe o " + (i + 1) + "º astronauta: ");
+            int astronautaId = scanner.nextInt();
+            scanner.nextLine();
+
+            Astronauta a = astronauta.find(ObjectFilters.eq("id", astronautaId)).firstOrDefault();
+
+            if (a == null) {
+                System.out.println("Astronauta não encontrado, tente novamente.");
+                i--;
+                continue;
+            }
+
             tripulacao.add(a);
             a.setDisponivel(false);
             astronauta.update(a);
-            scanner.nextLine();
+        }
 
-            if(opc == 1){
-                Nave n = naveTripulada.find(ObjectFilters.eq("id", nave)).firstOrDefault();
-                n.setDisponivel(false);
-                naveTripulada.update((NaveTripulada) n);
-            }else{
-                Nave n = naveCargueira.find(ObjectFilters.eq("id", nave)).firstOrDefault();
-                n.setDisponivel(false);
-                naveTripulada.update((NaveTripulada) n);
-            }
-
+        if(opc == 1){
+            Nave n = naveTripulada.find(ObjectFilters.eq("id", nave)).firstOrDefault();
+            n.setDisponivel(false);
+            naveTripulada.update((NaveTripulada) n);
+        }else{
+            Nave n = naveCargueira.find(ObjectFilters.eq("id", nave)).firstOrDefault();
+            n.setDisponivel(false);
+            naveTripulada.update((NaveTripulada) n);
         }
 
         if(opc == 1){
