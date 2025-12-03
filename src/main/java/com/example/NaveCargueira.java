@@ -7,6 +7,7 @@ public class NaveCargueira extends Nave {
     private int id;
     private double capacidadeCarga;
 
+    // ========== CONSTRUTORES ==========
     public NaveCargueira(){
     }
     public NaveCargueira(int id, String modelo,double capacidadeCarga) {
@@ -28,6 +29,7 @@ public class NaveCargueira extends Nave {
         this.capacidadeCarga = capacidadeCarga;
     }
 
+    // ========== TO STRING ==========
     @Override
     public String toString(){
         return "[" + id + "] " + super.toString() + " Capacidade de carga " + this.capacidadeCarga + "KG";

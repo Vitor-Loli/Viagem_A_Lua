@@ -1,11 +1,12 @@
 package com.example;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 import org.dizitart.no2.objects.Id;
 
-
 public class MissaoEspacial implements Serializable {
+    // ========== ATRIBUTOS ==========
     @Id
     private int id;
     private List<Astronauta> tripulacao = new ArrayList<>();
@@ -19,9 +20,11 @@ public class MissaoEspacial implements Serializable {
     private String resultado;
     private boolean concluida = false;
 
-    public MissaoEspacial() {}
-
-    public MissaoEspacial(int id, Nave nave, String nome, String dataDeLancamento, String destino, String objetivo, String resultado, List<Astronauta> tripulacao) {
+    // ========== CONSTRUTORES ==========
+    public MissaoEspacial() {
+    }
+    public MissaoEspacial(int id, Nave nave, String nome, String dataDeLancamento, String destino, String objetivo,
+            String resultado, List<Astronauta> tripulacao) {
         this.id = id;
         this.tripulacao = tripulacao;
         this.naveId = nave instanceof NaveTripulada ? ((NaveTripulada) nave).getId() : ((NaveCargueira) nave).getId();
@@ -34,6 +37,7 @@ public class MissaoEspacial implements Serializable {
         this.resultado = resultado;
     }
 
+    // ========== GETTERS E SETTERS ==========
     public int getId() {
         return id;
     }
@@ -100,35 +104,40 @@ public class MissaoEspacial implements Serializable {
     public void setConcluida(boolean concluida) {
         this.concluida = concluida;
     }
-
     public void adicionarAstronauta(Astronauta a) {
         this.tripulacao.add(a);
     }
     public void removerAstronauta(Astronauta a) {
         this.tripulacao.remove(a);
     }
-    
+
+    // ========== TO STRING ==========
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("=== MISSÃO ESPACIAL ===\n");
-        sb.append("ID: ").append(id).append("\n");
-        sb.append("Nome: ").append(nome).append("\n");
-        sb.append("Data de Lançamento: ").append(dataDeLancamento).append("\n");
-        sb.append("Destino: ").append(destino).append("\n");
-        sb.append("Objetivo: ").append(objetivo).append("\n");
-        sb.append("Nave: ").append(nomeNave).append(" (").append(tipoNave).append(")\n");
-        sb.append("Status: ").append(concluida ? "CONCLUÍDA" : "EM ANDAMENTO").append("\n");
-        sb.append("Resultado: ").append(resultado.isEmpty() ? "Pendente" : resultado).append("\n");
-        sb.append("Tripulação (").append(tripulacao.size()).append(" astronautas):\n");
+
+        sb.append("=== MISSÃO ").append("[").append(id).append("] - ").append(nome).append(" ===\n");
+        sb.append("Data: ").append(dataDeLancamento)
+                .append(" | Destino: ").append(destino).append("\n");
+
+        sb.append("Nave: ").append(nomeNave).append(" (").append(tipoNave).append(")")
+                .append(" | Status: ").append(concluida ? "CONCLUÍDA" : "EM ANDAMENTO").append("\n");
+
+        sb.append("Objetivo: ").append(objetivo == null || objetivo.isEmpty() ? "--" : objetivo).append("\n");
+        sb.append("Resultado: ").append((resultado == null || resultado.isEmpty()) ? "Pendente" : resultado)
+                .append("\n");
+
+        sb.append("--- Tripulação (Total: ").append(tripulacao.size()).append(") ---\n");
         for (Astronauta a : tripulacao) {
-            sb.append("  - ").append(a.getNome()).append(" (ID: ").append(a.getId()).append(", Especialidade: ").append(a.getEspecialidade()).append(")\n");
+            sb.append("[").append(a.getId()).append("] ")
+                    .append(a.getNome()).append(" | Especialidade: ").append(a.getEspecialidade()).append("\n");
         }
-        sb.append("========================\n");
+
+        sb.append("===============================\n");
         return sb.toString();
     }
 
-    public String toStringResultado(){
+    public String toStringResultado() {
         StringBuilder sb = new StringBuilder();
         sb.append("=== MISSÃO ESPACIAL ===\n");
         sb.append("ID: ").append(id).append("\n");

@@ -1,5 +1,5 @@
 package com.example;
-import org.dizitart.no2.filters.Filters;
+
 import org.dizitart.no2.objects.ObjectRepository;
 import org.dizitart.no2.objects.filters.ObjectFilters;
 import java.util.List;
@@ -14,19 +14,21 @@ public class Gerenciador {
     ObjectRepository<NaveCargueira> naveCargueira = Banco.repositorio(NaveCargueira.class);
     ObjectRepository<MissaoEspacial> missao = Banco.repositorio(MissaoEspacial.class);
 
-
     public Gerenciador(Scanner scanner) {
         this.scanner = scanner;
     }
 
+    // ==========================================================================================
+    // ======================================= ASTRONAUTA =======================================
+    // ==========================================================================================
     public void cadAstronauta() {
         System.out.println("Informe o nome do Astronauta: ");
-        String nome =scanner.nextLine();
+        String nome = scanner.nextLine();
         System.out.println("Informe a idade do Astronauta: ");
-        int idade =scanner.nextInt();
+        int idade = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Informe a especialidade do Astronauta: ");
-        String especialidade =scanner.nextLine();
+        String especialidade = scanner.nextLine();
         int id = 0;
 
         for (Astronauta a : astronauta.find()) {
@@ -37,22 +39,26 @@ public class Gerenciador {
 
         id += 1;
 
-        astronauta.insert(new Astronauta(id, nome,idade,especialidade));
+        astronauta.insert(new Astronauta(id, nome, idade, especialidade));
     }
-    public void listarAstronautas() {
+
+    public boolean listarAstronautas() {
+        boolean flag = false;
         System.out.println("============= ASTRONAUTAS =============\n\n");
         for (Astronauta a : astronauta.find()) {
             System.out.println("---------------------------------------\n" + a.toString());
+            flag = true;
         }
         System.out.println("---------------------------------------\n\n");
         System.out.println("=======================================");
+        return flag;
     }
 
-    public boolean listarAstronautasDispiniveis(boolean imprimir){
+    public boolean listarAstronautasDispiniveis(boolean imprimir) {
         boolean flag = false;
         for (Astronauta a : astronauta.find()) {
-            if(a.isDisponivel() ){
-                if(imprimir){
+            if (a.isDisponivel()) {
+                if (imprimir) {
                     System.out.println(a.toString());
                 }
                 flag = true;
@@ -62,9 +68,12 @@ public class Gerenciador {
         return flag;
     }
 
+    // ==========================================================================================
+    // ========================================= NAVE ===========================================
+    // ==========================================================================================
     public void cadNave() {
         boolean flag = true;
-        do{
+        do {
             System.out.println("Informe o tipo da nave: \n[1] - Nave de Tripulantes\n[2] - Nave Cargueira");
             int opc = scanner.nextInt();
             scanner.nextLine();
@@ -86,58 +95,52 @@ public class Gerenciador {
 
             id += 1;
 
-            switch (opc){
+            switch (opc) {
                 case 1:
                     System.out.println("Informe a capacidade máxima de tripulantes: ");
-                    int capacidadeTripulantes =scanner.nextInt();
+                    int capacidadeTripulantes = scanner.nextInt();
                     scanner.nextLine();
-                    naveTripulada.insert(new NaveTripulada(id , modelo, capacidadeTripulantes));
+                    naveTripulada.insert(new NaveTripulada(id, modelo, capacidadeTripulantes));
                     flag = false;
                     break;
                 case 2:
                     System.out.println("Informe a capacidade máxima de carga (em KG): ");
-                    double capacidadeCarga =scanner.nextDouble();
+                    double capacidadeCarga = scanner.nextDouble();
                     scanner.nextLine();
-                    naveCargueira.insert(new NaveCargueira(id , modelo, capacidadeCarga));
+                    naveCargueira.insert(new NaveCargueira(id, modelo, capacidadeCarga));
                     flag = false;
                     break;
                 default:
                     System.out.println("Opção invalida");
             }
-        }while(flag);
+        } while (flag);
     }
-    public void listarNaves(){
-        System.out.println("=============== NAVES ===============\n\n");
 
+    public boolean listarNaves() {
+        boolean flag = false;
+        System.out.println("=============== NAVES ===============\n\n");
 
         System.out.println("------------ [Tripulada] ------------");
         for (NaveTripulada n : naveTripulada.find()) {
             System.out.println(n.toString());
             System.out.println("-------------------------------------");
+            flag = true;
         }
 
         System.out.println("\n\n\n------------ [Cargueira] ------------");
         for (NaveCargueira n : naveCargueira.find()) {
             System.out.println(n.toString());
             System.out.println("-------------------------------------");
+            flag = true;
         }
         System.out.println("\n\n=====================================");
+        return flag;
     }
 
-    public boolean listarNavesTripuladasDisponiveis(){
+    public boolean listarNavesTripuladasDisponiveis() {
         boolean flag = false;
         for (NaveTripulada n : naveTripulada.find()) {
-            if(n.isDisponivel()){
-                System.out.println(n.toString());
-                flag = true;
-            }
-        }
-        return flag;
-    }
-    public boolean listarNavescargueirasDisponiveis(){
-        boolean flag = false;
-        for (NaveCargueira n : naveCargueira.find()) {
-            if(n.isDisponivel()){
+            if (n.isDisponivel()) {
                 System.out.println(n.toString());
                 flag = true;
             }
@@ -145,17 +148,31 @@ public class Gerenciador {
         return flag;
     }
 
+    public boolean listarNavescargueirasDisponiveis() {
+        boolean flag = false;
+        for (NaveCargueira n : naveCargueira.find()) {
+            if (n.isDisponivel()) {
+                System.out.println(n.toString());
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    // ==========================================================================================
+    // ===================================== MISSÃO ESPACIAL ====================================
+    // ==========================================================================================
     public void cadMissaoEspacial() {
-        if(astronauta.find().size() == 0){
+        if (astronauta.find().size() == 0) {
             System.out.println("Nenhum Astronauta cadastrado!");
             return;
         }
-        if(naveTripulada.find().size() == 0 && naveCargueira.find().size() == 0){
+        if (naveTripulada.find().size() == 0 && naveCargueira.find().size() == 0) {
             System.out.println("Nenhuma Nave cadastrada!");
             return;
         }
 
-        if(!listarAstronautasDispiniveis(false)){
+        if (!listarAstronautasDispiniveis(false)) {
             System.out.println("Nenhum astronauta disponível para a missão!");
             return;
         }
@@ -171,39 +188,39 @@ public class Gerenciador {
         id += 1;
 
         System.out.println("Informe o nome da missão: ");
-        String nome =scanner.nextLine();
+        String nome = scanner.nextLine();
         System.out.println("Informe a data de lançamento: ");
-        String dataLancamento =scanner.nextLine();
+        String dataLancamento = scanner.nextLine();
         System.out.println("Informe o destino da nave: ");
-        String destino =scanner.nextLine();
+        String destino = scanner.nextLine();
         System.out.println("Informe o objetivo da missão: ");
-        String objetivo =scanner.nextLine();
+        String objetivo = scanner.nextLine();
         System.out.println("Informe o tipo da nave utilizada: \n[1]- Nave de Tripulantes\n[2]- Nave Cargueira");
         int opc = scanner.nextInt();
         scanner.nextLine();
         boolean flag = true;
-        do{
-            switch (opc){
+        do {
+            switch (opc) {
                 case 1:
-                    if(!listarNavesTripuladasDisponiveis()){
+                    if (!listarNavesTripuladasDisponiveis()) {
                         System.out.println("Nenhuma Nave Disponível para a missão!");
                         return;
-                    }else{
+                    } else {
                         flag = false;
                     }
                     break;
                 case 2:
-                    if(!listarNavescargueirasDisponiveis()){
+                    if (!listarNavescargueirasDisponiveis()) {
                         System.out.println("Nenhuma Nave Disponível para a missão!");
                         return;
-                    }else{
+                    } else {
                         flag = false;
                     }
                     break;
                 default:
                     System.out.println("Opção inválida");
             }
-        }while(flag);
+        } while (flag);
         System.out.println("Informe a nave utilizada para a missão: ");
         int nave = scanner.nextInt();
         scanner.nextLine();
@@ -237,36 +254,33 @@ public class Gerenciador {
             astronauta.update(a);
         }
 
-
-
-        if(opc == 1){
+        if (opc == 1) {
             NaveTripulada n = naveTripulada.find(ObjectFilters.eq("id", nave)).firstOrDefault();
             n.setDisponivel(false);
             naveTripulada.update(n);
-            missao.insert(new MissaoEspacial(id, n, nome, dataLancamento, destino , objetivo ,"", tripulacao));
-        }else{
+            missao.insert(new MissaoEspacial(id, n, nome, dataLancamento, destino, objetivo, "", tripulacao));
+        } else {
             NaveCargueira n = naveCargueira.find(ObjectFilters.eq("id", nave)).firstOrDefault();
             n.setDisponivel(false);
             naveCargueira.update(n);
-            missao.insert(new MissaoEspacial(id, n, nome, dataLancamento, destino , objetivo ,"", tripulacao));
+            missao.insert(new MissaoEspacial(id, n, nome, dataLancamento, destino, objetivo, "", tripulacao));
         }
-
 
     }
 
-    public boolean listarMissoes(){
+    public boolean listarMissoes() {
         boolean flag = false;
-        for(MissaoEspacial m : missao.find()){
+        for (MissaoEspacial m : missao.find()) {
             System.out.println(m.toString());
             flag = true;
         }
         return flag;
     }
 
-    public boolean listarMissoesEmAberto(){
+    public boolean listarMissoesEmAberto() {
         boolean flag = false;
-        for(MissaoEspacial m : missao.find()){
-            if(!m.isConcluida()) {
+        for (MissaoEspacial m : missao.find()) {
+            if (!m.isConcluida()) {
                 System.out.println(m.toString());
                 flag = true;
             }
@@ -274,10 +288,10 @@ public class Gerenciador {
         return flag;
     }
 
-    public boolean listarResultados(){
+    public boolean listarResultados() {
         boolean flag = false;
-        for(MissaoEspacial m : missao.find()){
-            if(m.isConcluida()) {
+        for (MissaoEspacial m : missao.find()) {
+            if (m.isConcluida()) {
                 System.out.println(m.toStringResultado());
                 flag = true;
             }
@@ -285,8 +299,8 @@ public class Gerenciador {
         return flag;
     }
 
-    public void finalizarMissao(){
-        if(!listarMissoesEmAberto()){
+    public void finalizarMissao() {
+        if (!listarMissoesEmAberto()) {
             System.out.println("Não há missões em aberto!");
             return;
         }
@@ -302,11 +316,11 @@ public class Gerenciador {
 
         int naveId = m.getNaveId();
         String naveType = m.getTipoNave();
-        if(naveType.equals("Tripulada")){
+        if (naveType.equals("Tripulada")) {
             Nave n = naveTripulada.find(ObjectFilters.eq("id", naveId)).firstOrDefault();
             n.setDisponivel(true);
             naveTripulada.update((NaveTripulada) n);
-        }else {
+        } else {
             Nave n = naveCargueira.find(ObjectFilters.eq("id", naveId)).firstOrDefault();
             n.setDisponivel(true);
             naveCargueira.update((NaveCargueira) n);

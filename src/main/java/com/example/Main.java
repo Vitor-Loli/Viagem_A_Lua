@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // inicializando objetos
+        // inicializando scanner e gerenciador
         Scanner scanner = new Scanner(System.in);
         Gerenciador gerenciador = new Gerenciador(scanner);
-        // variavel para controlar o loop do menu
+        // variavel de controle do loop do menu
         boolean continuar = true;
 
-        // loop do menu
+        // ======================================= LOOP DO MENU =======================================
         while (continuar) {
             System.out.println("\n\n=============== MENU ===============\n" +
 			                   "[1] - Cadastrar novo astronauta\n" +
@@ -22,8 +22,9 @@ public class Main {
                                "[6] - Excluir nave\n" +
 			                   "------------------------------------\n" +
 			                   "[7] - Iniciar nova missão espacial\n" +
-			                   "[8] - Finalizar missão espacial\n" +
-			                   "[9] - Listar missões espaciais\n" +
+			                   "[8] - Listar missões espaciais\n" +
+                               "[9] - Finalizar missão espacial\n" +
+                               "[10] - Listar resultados de missões\n" +
 			                   "------------------------------------\n" +
 			                   "[0] - Sair\n" +
 			                   "====================================\n");
@@ -32,13 +33,15 @@ public class Main {
             System.out.print("Opção: ");
             String opcao = scanner.nextLine();
 
-            // executando a acao escolhida
+            // executando a opcao escolhida
             switch (opcao) {
                 case "1":
                     gerenciador.cadAstronauta();
                     break;
                 case "2":
-                    gerenciador.listarAstronautas();
+                    if(gerenciador.listarAstronautas() == false){
+                        System.out.println("Nenhum astronauta cadastrado!");
+                    }
                     break;
                 case "3":
                     //gerenciador.excluirAstronauta();
@@ -47,7 +50,9 @@ public class Main {
                     gerenciador.cadNave();
                     break;
                 case "5":
-                    gerenciador.listarNaves();
+                    if(gerenciador.listarNaves() == false){
+                        System.out.println("Nenhuma nave cadastrada!");
+                    }
                     break;
                 case "6":
                     //gerenciador.excluirNave();
@@ -56,13 +61,17 @@ public class Main {
                     gerenciador.cadMissaoEspacial();
                     break;
                 case "8":
-                    gerenciador.finalizarMissao();
+                    if(gerenciador.listarMissoes() == false){
+                        System.out.println("Nenhuma missão espacial cadastrada!");
+                    }
                     break; 
                 case "9":
-                    gerenciador.listarMissoes();
+                    gerenciador.finalizarMissao();
                     break;
                 case "10":
-                    gerenciador.listarResultados();
+                    if(gerenciador.listarResultados() == false){
+                        System.out.println("Nenhum resultado de missão disponível!");
+                    }
                     break;
                 case "0":
                     continuar = false;
@@ -73,7 +82,7 @@ public class Main {
             }
         }
 
-        // fechando recursos
+        // fechando scanner e banco
         scanner.close();
         Banco.fecharBanco();
     }
