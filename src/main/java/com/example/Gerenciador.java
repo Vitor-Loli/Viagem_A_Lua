@@ -42,13 +42,16 @@ public class Gerenciador {
         astronauta.insert(new Astronauta(id, nome, idade, especialidade));
     }
 
-    public void listarAstronautas() {
+    public boolean listarAstronautas() {
+        boolean flag = false;
         System.out.println("============= ASTRONAUTAS =============\n\n");
         for (Astronauta a : astronauta.find()) {
             System.out.println("---------------------------------------\n" + a.toString());
+            flag = true;
         }
         System.out.println("---------------------------------------\n\n");
         System.out.println("=======================================");
+        return flag;
     }
 
     public boolean listarAstronautasDispiniveis(boolean imprimir) {
@@ -113,21 +116,25 @@ public class Gerenciador {
         } while (flag);
     }
 
-    public void listarNaves() {
+    public boolean listarNaves() {
+        boolean flag = false;
         System.out.println("=============== NAVES ===============\n\n");
 
         System.out.println("------------ [Tripulada] ------------");
         for (NaveTripulada n : naveTripulada.find()) {
             System.out.println(n.toString());
             System.out.println("-------------------------------------");
+            flag = true;
         }
 
         System.out.println("\n\n\n------------ [Cargueira] ------------");
         for (NaveCargueira n : naveCargueira.find()) {
             System.out.println(n.toString());
             System.out.println("-------------------------------------");
+            flag = true;
         }
         System.out.println("\n\n=====================================");
+        return flag;
     }
 
     public boolean listarNavesTripuladasDisponiveis() {
