@@ -4,10 +4,9 @@ import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
 
 public class Banco {
-
     private static Nitrite db;
 
-    public Banco(){
+    public Banco() {
         Banco.conectar();
     }
 
