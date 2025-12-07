@@ -15,16 +15,14 @@ public class Main {
             System.out.println("\n\n=============== MENU ===============\n" +
 			                   "[1] - Cadastrar novo astronauta\n" +
 			                   "[2] - Listar astronautas\n" +
-                               "[3] - Excluir astronauta\n" +
 			                   "------------------------------------\n" +
-			                   "[4] - Cadastrar nova nave\n" +
-			                   "[5] - Listar todas as naves\n" +
-                               "[6] - Excluir nave\n" +
+			                   "[3] - Cadastrar nova nave\n" +
+			                   "[4] - Listar todas as naves\n" +
 			                   "------------------------------------\n" +
-			                   "[7] - Iniciar nova missão espacial\n" +
-			                   "[8] - Listar missões espaciais\n" +
-                               "[9] - Finalizar missão espacial\n" +
-                               "[10] - Listar resultados de missões\n" +
+			                   "[5] - Iniciar nova missão espacial\n" +
+			                   "[6] - Listar missões espaciais\n" +
+                               "[7] - Finalizar missão espacial\n" +
+                               "[8] - Listar resultados de missões\n" +
 			                   "------------------------------------\n" +
 			                   "[0] - Sair\n" +
 			                   "====================================\n");
@@ -44,31 +42,25 @@ public class Main {
                     }
                     break;
                 case "3":
-                    //gerenciador.excluirAstronauta();
-                    break;
-                case "4":
                     gerenciador.cadNave();
                     break;
-                case "5":
+                case "4":
                     if(gerenciador.listarNaves() == false){
                         System.out.println("Nenhuma nave cadastrada!");
                     }
                     break;
-                case "6":
-                    //gerenciador.excluirNave();
-                    break;
-                case "7":
+                case "5":
                     gerenciador.cadMissaoEspacial();
                     break;
-                case "8":
+                case "6":
                     if(gerenciador.listarMissoes() == false){
                         System.out.println("Nenhuma missão espacial cadastrada!");
                     }
                     break; 
-                case "9":
+                case "7":
                     gerenciador.finalizarMissao();
                     break;
-                case "10":
+                case "8":
                     if(gerenciador.listarResultados() == false){
                         System.out.println("Nenhum resultado de missão disponível!");
                     }
